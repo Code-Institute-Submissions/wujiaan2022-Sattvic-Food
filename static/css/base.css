@@ -7,7 +7,6 @@ body {
     font-family: 'Lato';
 }
 
-
 /* from Bulma */
 .icon {
     align-items: center;
@@ -19,7 +18,7 @@ body {
 
 .icon-text:hover,
 .icon-text:active,
-.icon-text:focus {
+.icon-text:focus{
     color: orange;
 }
 
