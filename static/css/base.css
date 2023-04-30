@@ -7,6 +7,7 @@ body {
     font-family: 'Lato';
 }
 
+
 /* from Bulma */
 .icon {
     align-items: center;
@@ -14,6 +15,8 @@ body {
     justify-content: center;
     height: 1.5rem;
     width: 1.5rem;
+    margin: 0;
+    padding: 0;
 }
 
 .icon-text:hover,
@@ -70,4 +73,23 @@ body {
       .header-container {
           padding-top: 164px;
       }
+      
+  }
+
+ 
+
+  @media (max-width: 350px) {
+    .navbar-toggler-icon{
+        font-size: 0.8em;
+    }
+    
+    .navbar-toggler{
+        padding: 1px;
+    }
+    
+    i {
+        margin: 0;
+        padding: 0;
+    }    
+
   }
