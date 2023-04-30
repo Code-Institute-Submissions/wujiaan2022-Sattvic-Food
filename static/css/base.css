@@ -7,6 +7,9 @@ body {
     font-family: 'Lato';
 }
 
+.text-box {
+    margin-top: 20vh;
+}
 
 /* from Bulma */
 .icon {
@@ -24,6 +27,13 @@ body {
 .icon-text:focus{
     color: orange;
 }
+
+.navbar-toggler-icon:hover,
+.navbar-toggler-icon:active,
+.navbar-toggler-icon:focus{
+    background-color: orange;
+}
+
 
 .logo-font {
     text-transform: uppercase;
@@ -84,7 +94,7 @@ body {
     }
     
     .navbar-toggler{
-        padding: 1px;
+        padding: 0;
     }
     
     i {
