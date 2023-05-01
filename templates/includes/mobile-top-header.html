@@ -1,7 +1,7 @@
 <li class="list-inline-item">
     <a class="text-success nav-link d-block d-lg-none" href="#" id="mobile-search" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <div class="text-center icon-text">
-            <div class="m-0"><i class="fas fa-search fa-1x"></i></div>            
+            <div class="m-0"><i class="fas fa-search fa-md"></i></div>            
         </div>
     </a>
     <div class="dropdown-menu border-0 w-100 p-3 rounded-0 m-0" aria-labelledby="mobile-search">
@@ -41,14 +41,9 @@
 <li class="list-inline-item">
     <a class="{% if grand_total %}text-primary font-weight-bold{% else %}text-success{% endif %} nav-link d-block d-lg-none" href="">
         <div class="text-center icon-text">
-            <div><i class="fas fa-shopping-bag fa-lg"></i></div>
-            <p class="m-0 mobile-font">
-                {% if grand_total %}
-                    ${{ grand_total|floatformat:2 }}
-                {% else %}
-                    $0.00
-                {% endif %}
-            </p>
+            <div>
+                <i class="fas fa-shopping-bag fa-lg"></i>
+            </div>            
         </div>
     </a>
 </li>
