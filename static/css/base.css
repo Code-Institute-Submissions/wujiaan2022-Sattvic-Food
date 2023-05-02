@@ -43,7 +43,6 @@ a.category-badge > span.badge:hover {
     background-color: orange;
 }
 
-
 .logo-font {
     text-transform: uppercase;
 }
@@ -58,15 +57,24 @@ a.category-badge > span.badge:hover {
     min-width: 260px;
 }
 
+.keep-shopping-button {
+    background: white;
+    color: green;
+}
+
 .shop-now-button:hover,
 .shop-now-button:active,
 .shop-now-button:focus,
 .btn-green:hover,
 .btn-green:active,
-.btn-green:focus {
+.btn-green:focus,
+.keep-shopping-button:hover,
+.keep-shopping-button:active,
+.keep-shopping-button:focus {
     background: orange;
     color: white;
 }
+
 
 .btt-button {
     height: 42px;
@@ -81,23 +89,7 @@ a.category-badge > span.badge:hover {
 }
 
 
-.btn-black {
-    background: black;
-    color: white;
-}
 
-.btn-outline-black {
-    background: white;
-    color: black !important; /* use important to override link colors for <a> elements */
-    border: 1px solid black;
-}
-
-.btn-outline-black:hover,
-.btn-outline-black:active,
-.btn-outline-black:focus {
-    background: black;
-    color: white !important;
-}
 
 
 /* -------------------------------- Media Queries */
