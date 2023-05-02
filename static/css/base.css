@@ -86,22 +86,30 @@ body {
     
 }
 
- 
+@media (max-width: 350px) {
+.navbar-toggler-icon{
+    font-size: 0.8em;
+}
 
-  @media (max-width: 350px) {
-    .navbar-toggler-icon{
-        font-size: 0.8em;
+.navbar-toggler{
+    padding: 0;
+}
+
+i {
+    margin: 0;
+    padding: 0;
+}    
+
+}
+
+/* pad the top a bit when navbar is collapsed on mobile */
+@media (max-width: 991px) {
+    .header-container {
+        padding-top: 116px;
     }
-    
-    .navbar-toggler{
-        padding: 0;
+
+    body {
+        height: calc(100vh - 116px);
     }
-    
-    i {
-        margin: 0;
-        padding: 0;
-    }    
-
-  }
-
+}
 
