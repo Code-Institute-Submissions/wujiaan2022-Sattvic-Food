@@ -1,1 +1,1 @@
-web: gunicorn sattvic-food.wsgi:application
+web: gunicorn Sattvic_Food_Proj.wsgi:application
