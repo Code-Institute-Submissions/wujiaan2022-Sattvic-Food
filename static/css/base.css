@@ -244,8 +244,8 @@ i {
         height: calc(100vh - 116px);
     }
 
-    .display-4.text-home {
-        font-size: 2rem;
+    .text-home {
+        font-size: 1rem;
     }
 
     .nav-link {
