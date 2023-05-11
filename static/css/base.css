@@ -20,6 +20,32 @@ body {
 	z-index: -1;
 }
 
+.underline {
+
+    width: 20vw;
+    height:2px;
+    background-color: rgb(176, 240, 176);
+    opacity: initial;
+    margin-bottom: 10px;
+
+}
+
+a:link {
+    text-decoration: none;
+  }
+  
+  a:visited {
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: none;
+  }
+  
+  a:active {
+    text-decoration: none;
+  }
+
 .text-black {
     color: #000 !important;
 }
@@ -86,6 +112,13 @@ a.category-badge > span.badge:hover {
 .keep-shopping-button:focus {
     background: orange;
     color: white;
+}
+
+
+.text-hover:hover,
+.text-hover:active,
+.text-hover:focus {
+    color: orange;
 }
 
 
@@ -258,7 +291,7 @@ i {
 
     .navbar-toggler {
         padding: .6rem .6rem;
-        font-size: 1rem;
+        font-size: 2rem;
     }
 
     #delivery-banner h4 {
