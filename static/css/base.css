@@ -10,6 +10,14 @@ body {
     font-family: 'Lato';
 }
 
+.footer-container {
+    background-color: rgba(255, 255, 255, 0.8);    
+}
+
+.sign-out {
+    background-color: green;
+}
+
 .overlay {
 	height: 100%;
 	width: 100%;
@@ -29,6 +37,7 @@ body {
     margin-bottom: 10px;
 
 }
+
 
 a:link {
     text-decoration: none;
@@ -182,8 +191,8 @@ input[name='q']::placeholder {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    background-color: #000;
-    border: 1px solid #000;
+    background-color: green;
+    border: none;
     padding: .375rem .75rem;
     font-size: 1rem;
     line-height: 1.5;
@@ -196,14 +205,17 @@ input[name='q']::placeholder {
 .allauth-form-inner-content button:hover,
 .allauth-form-inner-content input[type='submit']:hover {	
 	color: #fff;
-    background-color: #222;
-    border-color: #222;
+    background-color: orange;
+    border: none;
 }
 
 .allauth-form-inner-content a {
 	color: #17a2b8; /* text-info */
 }
 
+.allauth-form-inner-content a:hover {
+	color: orange; /* text-info */
+}
 
 /* Product Form */
 
