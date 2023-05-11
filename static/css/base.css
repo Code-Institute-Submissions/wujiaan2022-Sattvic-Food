@@ -130,6 +130,12 @@ a.category-badge > span.badge:hover {
     color: orange;
 }
 
+.mainnav-text-hover:hover,
+.mainnav-text-hover:active,
+.mainnav-text-hover:focus {
+    color: orange;
+}
+
 
 .btt-button {
     height: 42px;
