@@ -157,14 +157,15 @@ input[name='q']::placeholder {
 /* -------------------------------- Media Queries */
 
 /* Slightly larger container on xl screens */
+
 @media (min-width: 1200px) {
     .container {
       max-width: 80%;
     }
   }
-
-/* Allauth form formatting */
-
+  
+  /* Allauth form formatting */
+  
 .allauth-form-inner-content p {
     margin-top: 1.5rem; /* mt-4 */
     color: #6c757d; /* text-secondary */
@@ -267,21 +268,6 @@ input[name='q']::placeholder {
     
 }
 
-@media (max-width: 350px) {
-.navbar-toggler-icon{
-    font-size: 0.8em;
-}
-
-.navbar-toggler{
-    padding: 0;
-}
-
-i {
-    margin: 0;
-    padding: 0;
-}    
-
-}
 
 /* pad the top a bit when navbar is collapsed on mobile */
 @media (max-width: 991px) {
@@ -293,8 +279,13 @@ i {
         height: calc(100vh - 116px);
     }
 
+    .display-4.logo-font.text-success {
+        font-size: 2rem;
+    }
+
+   
     .text-home {
-        font-size: 1rem;
+        font-size: 1.5rem;
     }
 
     .nav-link {
@@ -312,7 +303,12 @@ i {
 
     #delivery-banner h4 {
         font-size: .9rem;
+        text-align: center;
+        
     }
+
+   
+    
 
     .btn.shop-now-button.rounded-0,
     .btn.keep-shopping-button.rounded-0 {
