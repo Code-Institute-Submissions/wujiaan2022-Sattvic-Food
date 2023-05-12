@@ -124,9 +124,7 @@ a.category-badge > span.badge:hover {
 }
 
 
-.text-hover:hover,
-.text-hover:active,
-.text-hover:focus {
+.text-hover:hover {
     color: orange;
 }
 
