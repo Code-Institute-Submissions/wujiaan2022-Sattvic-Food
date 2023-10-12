@@ -6,9 +6,7 @@ from .models import Product, Category, Size, ProductSize
 
 class ProductSizeInline(admin.TabularInline):
     model = ProductSize
-    extra = 1  # Number of empty forms to display
-
-    ordering = ('sku',)
+    extra = 1  # Number of empty forms to display    
     
     
 class ProductAdmin(admin.ModelAdmin):
