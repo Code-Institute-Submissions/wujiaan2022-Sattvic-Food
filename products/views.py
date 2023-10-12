@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.db.models.functions import Lower
 
-from .models import Product, Category
+from .models import Product, Category, Size, ProductSize
 from .forms import ProductForm
 
 # Create your views here.
@@ -60,17 +60,25 @@ def all_products(request):
     return render(request, 'products/products.html', context)
 
 
+# def product_detail(request, product_id):
+#     """ A view to show individual product details """
+
+#     product = get_object_or_404(Product, pk=product_id)
+
+#     context = {
+#         'product': product,
+#     }
+
+#     return render(request, 'products/product_detail.html', context)
+
 def product_detail(request, product_id):
-    """ A view to show individual product details """
-
     product = get_object_or_404(Product, pk=product_id)
-
-    context = {
+    product_sizes = ProductSize.objects.filter(product=product)
+    
+    return render(request, 'products/product_detail.html', {
         'product': product,
-    }
-
-    return render(request, 'products/product_detail.html', context)
-
+        'product_sizes': product_sizes
+    })
 
 @login_required
 def add_product(request):
