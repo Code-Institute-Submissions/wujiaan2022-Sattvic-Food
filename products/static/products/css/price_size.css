@@ -1,11 +1,6 @@
 .size-button {
     padding: 5px 10px;
-    border: 1px solid gray;
+    
     margin: 0 5px;
     cursor: pointer;
-}
-
-.size-button.selected {
-    background-color: #007BFF;  /* Example blue color for selected button */
-    color: white;
 }

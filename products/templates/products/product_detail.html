@@ -28,25 +28,26 @@
             </div>
             <div class="col-12 col-md-6 col-lg-4">
                 <div class="product-details-container mb-5 mt-md-5">
-                    <p class="mb-0">{{ product.name }}</p>
-                    <label>Sizes:</label>
-                    <div id="product_sizes_buttons">
+                    <h5 class="mb-3">{{ product.name }}</h5>
+                    <span>Options:</span>
+                    <span id="product_sizes_buttons">
                         {% for ps in product_sizes %}
-                            <button class="size-button" data-size-id="{{ ps.id }}" data-price="{{ ps.price }}">
+                            <button class="size-button keep-shopping-button" data-size-id="{{ ps.id }}" data-price="{{ ps.price }}">
                                 {{ ps.size.size_name }}
                             </button>
                         {% endfor %}
-                    </div>
-
-                    <label>Price:</label>
-                    <span id="product_price_display">$0.00</span>
+                    </span>
+                    <div class="mt-3">
+                        <span class="mr-3">Price:</span>                    
+                        <span id="product_price_display">$0.00</span>
+                    </div>                    
 
                     <!-- Hidden input fields to store the selected size's ID and price -->
                     <input type="hidden" name="selected_product_size" id="selected_product_size">
                     <input type="hidden" name="selected_product_price" id="selected_product_price">
 
                     {% if product.category %}
-                    <p class="small mt-1 mb-0">
+                    <p class="small mt-3 mb-0">
                         <a class="text-muted" href="{% url 'products' %}?category={{ product.category.name }}">
                             <i class="fas fa-tag mr-1"></i>{{ product.category.friendly_name }}
                         </a>
@@ -63,7 +64,7 @@
                             <a class="text-danger" href="{% url 'delete_product' product.id %}">Delete</a>
                         </small>
                     {% endif %}
-                    <p class="mt-3">{{ product.description }}</p>
+                    <p class="mt-3">{{ product.description|linebreaks }}</p>
                     <form class="form" action="{% url 'add_to_bag' product.id %}" method="POST">
                         {% csrf_token %}
                         <div class="form-row">
