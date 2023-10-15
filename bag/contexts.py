@@ -21,6 +21,7 @@ def bag_contents(request):
                 'item_id': item_id,
                 'quantity': item_data,
                 'product_with_size': product_with_size,
+                'product': product,
             })
         else:
             product_with_size = get_object_or_404(ProductSize, pk=item_id)
@@ -31,6 +32,7 @@ def bag_contents(request):
                     'item_id': item_id,
                     'quantity': quantity,
                     'product_with_size': product_with_size,
+                    'product': product,
                     'size': size,
                 })
 

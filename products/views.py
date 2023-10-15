@@ -3,6 +3,8 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.db.models.functions import Lower
+from django.db.models import Min, F, ExpressionWrapper, DecimalField
+from django.db.models import Subquery
 
 from .models import Product, Category, Size, ProductSize
 from .forms import ProductForm
@@ -14,6 +16,11 @@ def all_products(request):
     """ A view to show all products, including sorting and search queries """
 
     products = Product.objects.all()
+    
+    # Calculate and set minimum prices for each product
+    for product in products:
+        product.calculate_min_price()   
+    
     query = None
     categories = None
     sort = None
@@ -28,11 +35,15 @@ def all_products(request):
                 products = products.annotate(lower_name=Lower('name'))
             if sortkey == 'category':
                 sortkey = 'category__name'
+                
+            if sortkey == 'min_price':
+                sortkey = 'min_price'    
+               
             if 'direction' in request.GET:
                 direction = request.GET['direction']
                 if direction == 'desc':
                     sortkey = f'-{sortkey}'
-            products = products.order_by(sortkey)
+            products = products.order_by(sortkey)            
             
         if 'category' in request.GET:
             categories = request.GET['category'].split(',')
@@ -51,6 +62,7 @@ def all_products(request):
     current_sorting = f'{sort}_{direction}'
 
     context = {
+        
         'products': products,
         'search_term': query,
         'current_categories': categories,
@@ -59,17 +71,6 @@ def all_products(request):
 
     return render(request, 'products/products.html', context)
 
-
-# def product_detail(request, product_id):
-#     """ A view to show individual product details """
-
-#     product = get_object_or_404(Product, pk=product_id)
-
-#     context = {
-#         'product': product,
-#     }
-
-#     return render(request, 'products/product_detail.html', context)
 
 def product_detail(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
