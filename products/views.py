@@ -7,7 +7,7 @@ from django.db.models import Min, F, ExpressionWrapper, DecimalField
 from django.db.models import Subquery
 
 from .models import Product, Category, Size, ProductSize
-from .forms import ProductForm
+from .forms import ProductForm,  ProductSizeForm, ProductSizeFormSet
 
 # Create your views here.
 
@@ -81,6 +81,32 @@ def product_detail(request, product_id):
         'product_sizes': product_sizes
     })
 
+# @login_required
+# def add_product(request):
+#     """ Add a product to the store """
+#     if not request.user.is_superuser:
+#         messages.error(request, 'Sorry, only store owners can do that.')
+#         return redirect(reverse('home'))
+    
+#     if request.method == 'POST':
+#         form = ProductForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             product = form.save()
+#             messages.success(request, 'Successfully added product!')
+#             return redirect(reverse('product_detail', args=[product.id]))
+#         else:
+#             messages.error(request, 'Failed to add product. Please ensure the form is valid.')
+#     else:
+#         form = ProductForm()
+        
+#     template = 'products/add_product.html'
+#     context = {
+#         'form': form,
+#     }
+
+#     return render(request, template, context)
+
+
 @login_required
 def add_product(request):
     """ Add a product to the store """
@@ -89,19 +115,33 @@ def add_product(request):
         return redirect(reverse('home'))
     
     if request.method == 'POST':
-        form = ProductForm(request.POST, request.FILES)
-        if form.is_valid():
-            product = form.save()
+        product_form = ProductForm(request.POST, request.FILES)
+        product_size_form = ProductSizeForm(request.POST)
+
+        if product_form.is_valid() and product_size_form.is_valid():
+            # Process and save forms individually
+            product = product_form.save()
+            product_size = product_size_form.save(commit=False)
+            
+            # Set the queryset for the product field in product_size_form
+            product_size_form.fields['product'].queryset = Product.objects.filter(id=product.id)
+            
+            product_size.product = product
+            product_size.save()
+            
             messages.success(request, 'Successfully added product!')
             return redirect(reverse('product_detail', args=[product.id]))
         else:
-            messages.error(request, 'Failed to add product. Please ensure the form is valid.')
+            # Display form validation errors
+            messages.error(request, 'Failed to add product. Please correct the form errors.')
     else:
-        form = ProductForm()
+        product_form = ProductForm()
+        product_size_form = ProductSizeForm()
         
     template = 'products/add_product.html'
     context = {
-        'form': form,
+        'product_form': product_form,
+        'product_size_form': product_size_form,
     }
 
     return render(request, template, context)
@@ -114,22 +154,38 @@ def edit_product(request, product_id):
         messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
     
-    product = get_object_or_404(Product, pk=product_id)
+    product = get_object_or_404(Product, id=product_id)
+    product_sizes = ProductSize.objects.filter(product=product)
+    
     if request.method == 'POST':
-        form = ProductForm(request.POST, request.FILES, instance=product)
-        if form.is_valid():
-            form.save()
+        product_form = ProductForm(request.POST, request.FILES, instance=product)
+        product_size_formset = ProductSizeFormSet(request.POST, queryset=product_sizes)        
+        
+        if product_form.is_valid() and product_size_formset.is_valid():
+            product = product_form.save()
+
+            for form in product_size_formset:
+                product_size = form.save(commit=False)
+                product_size.product = product
+                product_size.save()
+            
             messages.success(request, 'Successfully updated product!')
             return redirect(reverse('product_detail', args=[product.id]))
         else:
+            print('Failed to update product. Please ensure the form is valid.')
+            print(product_form.errors)
+            print(product_size_formset.errors)
             messages.error(request, 'Failed to update product. Please ensure the form is valid.')
     else:
-        form = ProductForm(instance=product)
+        product_form = ProductForm(instance=product)
+        product_size_formset = ProductSizeFormSet(queryset=product_sizes)
+
         messages.info(request, f'You are editing {product.name}')
 
     template = 'products/edit_product.html'
     context = {
-        'form': form,
+        'product_form': product_form,
+        'product_size_formset': product_size_formset,
         'product': product,
     }
 
