@@ -40,10 +40,7 @@ class ProductSize(models.Model):
 class Product(models.Model):
     category = models.ForeignKey('Category', null=True, blank=True, on_delete=models.SET_NULL)
     sku = models.CharField(max_length=254, null=True, blank=True)
-    name = models.CharField(max_length=254)
-    
-    min_price = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
-    
+    name = models.CharField(max_length=254)   
     description = models.TextField()  
     rating = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
     image_url = models.URLField(max_length=1024, null=True, blank=True)
@@ -52,8 +49,4 @@ class Product(models.Model):
     def __str__(self):
         return self.name
     
-    # Define a method to calculate and set the minimum price
-    def calculate_min_price(self):
-        min_price = self.productsize_set.aggregate(min_price=Min('price'))['min_price']
-        self.min_price = min_price
-        self.save()
+  

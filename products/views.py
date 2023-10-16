@@ -17,9 +17,8 @@ def all_products(request):
 
     products = Product.objects.all()
     
-    # Calculate and set minimum prices for each product
-    for product in products:
-        product.calculate_min_price()   
+   # Calculate and set minimum prices for each product using ProductSize model
+    products = products.annotate(minPriceAnnotation=Min('productsize__price'))
     
     query = None
     categories = None
@@ -36,8 +35,9 @@ def all_products(request):
             if sortkey == 'category':
                 sortkey = 'category__name'
                 
-            if sortkey == 'min_price':
-                sortkey = 'min_price'    
+            if sortkey == 'minPriceAnnotation':
+            # Sort by the annotated 'min_price_annotation' field
+                sortkey = 'minPriceAnnotation'    
                
             if 'direction' in request.GET:
                 direction = request.GET['direction']
