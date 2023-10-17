@@ -7,7 +7,7 @@ from django.db.models import Min, F, ExpressionWrapper, DecimalField
 from django.db.models import Subquery
 
 from .models import Product, Category, Size, ProductSize
-from .forms import ProductForm,  ProductSizeForm, ProductSizeFormSet
+from .forms import ProductForm,  ProductSizeForm, CustomProductSizeFormSet
 
 # Create your views here.
 
@@ -124,7 +124,7 @@ def add_product(request):
             product_size = product_size_form.save(commit=False)
             
             # Set the queryset for the product field in product_size_form
-            product_size_form.fields['product'].queryset = Product.objects.filter(id=product.id)
+            # product_size_form.fields['product'].queryset = Product.objects.filter(id=product.id)
             
             product_size.product = product
             product_size.save()
@@ -159,26 +159,34 @@ def edit_product(request, product_id):
     
     if request.method == 'POST':
         product_form = ProductForm(request.POST, request.FILES, instance=product)
-        product_size_formset = ProductSizeFormSet(request.POST, queryset=product_sizes)        
+        print('Product form instance:')
+        print(product_form)
+        
+        product_size_formset = CustomProductSizeFormSet(request.POST, queryset=product_sizes)     
         
         if product_form.is_valid() and product_size_formset.is_valid():
+            
             product = product_form.save()
-
+            print('product form save success')
+            
             for form in product_size_formset:
                 product_size = form.save(commit=False)
                 product_size.product = product
                 product_size.save()
-            
+          
             messages.success(request, 'Successfully updated product!')
             return redirect(reverse('product_detail', args=[product.id]))
         else:
-            print('Failed to update product. Please ensure the form is valid.')
             print(product_form.errors)
             print(product_size_formset.errors)
+            # print('POST data:')
+            # print(request.POST)
+            print('Failed to update product. Please ensure the form is valid.')
+            
             messages.error(request, 'Failed to update product. Please ensure the form is valid.')
     else:
         product_form = ProductForm(instance=product)
-        product_size_formset = ProductSizeFormSet(queryset=product_sizes)
+        product_size_formset = CustomProductSizeFormSet(queryset=product_sizes)
 
         messages.info(request, f'You are editing {product.name}')
 
