@@ -81,31 +81,6 @@ def product_detail(request, product_id):
         'product_sizes': product_sizes
     })
 
-# @login_required
-# def add_product(request):
-#     """ Add a product to the store """
-#     if not request.user.is_superuser:
-#         messages.error(request, 'Sorry, only store owners can do that.')
-#         return redirect(reverse('home'))
-    
-#     if request.method == 'POST':
-#         form = ProductForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             product = form.save()
-#             messages.success(request, 'Successfully added product!')
-#             return redirect(reverse('product_detail', args=[product.id]))
-#         else:
-#             messages.error(request, 'Failed to add product. Please ensure the form is valid.')
-#     else:
-#         form = ProductForm()
-        
-#     template = 'products/add_product.html'
-#     context = {
-#         'form': form,
-#     }
-
-#     return render(request, template, context)
-
 
 @login_required
 def add_product(request):
@@ -160,7 +135,7 @@ def edit_product(request, product_id):
     if request.method == 'POST':
         product_form = ProductForm(request.POST, request.FILES, instance=product)
         print('Product form instance:')
-        print(product_form)
+        # print(product_form)
         
         product_size_formset = CustomProductSizeFormSet(request.POST, queryset=product_sizes)     
         
@@ -170,17 +145,21 @@ def edit_product(request, product_id):
             print('product form save success')
             
             for form in product_size_formset:
-                product_size = form.save(commit=False)
-                product_size.product = product
-                product_size.save()
+                if form.cleaned_data.get('DELETE'):
+                    if form.instance.id:
+                        form.instance.delete()
+                else:
+                    product_size = form.save(commit=False)
+                    product_size.product = product
+                    product_size.save()
           
             messages.success(request, 'Successfully updated product!')
             return redirect(reverse('product_detail', args=[product.id]))
         else:
             print(product_form.errors)
             print(product_size_formset.errors)
-            # print('POST data:')
-            # print(request.POST)
+            print('POST data:')
+            print(request.POST)
             print('Failed to update product. Please ensure the form is valid.')
             
             messages.error(request, 'Failed to update product. Please ensure the form is valid.')

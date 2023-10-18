@@ -16,10 +16,26 @@ class ProductSizeForm(forms.ModelForm):
         model = ProductSize
         # fields = ['size', 'price']
         fields = '__all__'  
-        exclude = ['product']  
+        exclude = ['product']
+        
+        # def clean(self):
+        #     cleaned_data = super().clean()
+        #     size = cleaned_data.get('size')
+        #     price = cleaned_data.get('price')
+
+        #     # Check if the form is marked for deletion
+        #     if self.cleaned_data.get('DELETE'):
+        #         return cleaned_data  # Skip further validation for deleted forms
+
+        #     # Add your validation logic here for non-deleted forms
+        #     if not size:
+        #         raise forms.ValidationError("Size is required.")
+        #     if price is None:
+        #         raise forms.ValidationError("Price is required.")
+        #     return cleaned_data
         
 
-class CustomProductSizeFormSet(modelformset_factory(ProductSize, form=ProductSizeForm, extra=0)):
+class CustomProductSizeFormSet(modelformset_factory(ProductSize, form=ProductSizeForm, extra=1, can_delete=True)):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         
