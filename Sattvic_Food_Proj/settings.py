@@ -29,10 +29,13 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'DEVELOPMENT' in os.environ
-# DEBUG = True
 
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True
 
-ALLOWED_HOSTS = ['sattvic-food.herokuapp.com', 'localhost']
+# ALLOWED_HOSTS = ['sattvic-food.herokuapp.com', 'localhost']
+
+ALLOWED_HOSTS = ['8000-wujiaan2022-sattvicfood-vq8km72132a.ws-eu107.gitpod.io']
 
 
 # Application definition
