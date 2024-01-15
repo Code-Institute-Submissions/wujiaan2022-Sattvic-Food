@@ -1,24 +1,57 @@
-.image-container img {
-    max-width: 100%;
-    height: auto;
+/* General Styling for Labels */
+label {
+    /* display: block; */
+    font-weight: bold;
+    margin-bottom: 5px;
+    margin-right: 10px;
+    color: #333; /* Adjust the color as per your theme */
+    font-size: 1rem;
+}
+
+
+.size-container {
+    margin-top: 20px; /* Adjust this value as needed */
+}
+
+.price-container {
+    margin-bottom: 20px; /* Adjust this value as needed */
+}
+
+/* Button Styles for Sizes */
+.size-button {
+    background-color: #f8f8f8; /* Light background */
+    border: 1px solid #ddd; /* Subtle border */
+    padding: 8px 12px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.size-button:hover {
+    background-color: #e9e9e9; /* Slightly darker on hover */
+    border-color: #ccc;
+}
+
+.size-button.active {
+    background-color: #007bff; /* Active button color */
+    color: white;
+    border-color: #007bff;
+}
+
+/* Price Display Styles */
+#price-display {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #007bff; /* Price color */
+}
+
+#product_sizes_buttons, #price-display {
+    display: inline; /* Ensures inline display */
+    
 }
 
 .product-details-container {
-    padding: 20px;
-}
-
-.size-button {
-    margin-right: 5px;
-    padding: 5px 10px;
-}
-
-#price-display {
-    font-size: 1.2em;
-    font-weight: bold;
-}
-
-@media (min-width: 768px) {
-    .image-container, .product-details-container {
-        padding: 30px;
-    }
+    margin-top: 20px; /* Adjust the value as needed */
 }
