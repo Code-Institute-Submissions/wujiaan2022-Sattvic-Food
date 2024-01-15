@@ -11,8 +11,7 @@ class ProductSizeInline(admin.TabularInline):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = [
-        
+    list_display = [        
         'name',
         'category',      
         'sku',
@@ -36,6 +35,6 @@ class CategoryAdmin(admin.ModelAdmin):
     )
 
 
-# @admin.register(ProductSize)
-# class ProductSizeAdmin(admin.ModelAdmin):
-#     list_display = ['product', 'size', 'price'] 
+@admin.register(ProductSize)
+class ProductSizeAdmin(admin.ModelAdmin):
+    list_display = ['product', 'size', 'price'] 

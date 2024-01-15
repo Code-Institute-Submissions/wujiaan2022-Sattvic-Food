@@ -1,19 +1,25 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.db.models import Q
+from django.db.models import Q, Prefetch
 from django.db.models.functions import Lower
 
-from .models import Product, Category
-from .forms import ProductForm
 
-# Create your views here.
+from .models import Product, Category, Size, ProductSize
+from .forms import CategoryForm, SizeForm, ProductForm, ProductSizeForm
 
 
 def all_products(request):
     """ A view to show all products, including sorting and search queries """
 
-    products = Product.objects.all()
+    # Fetch all ProductSize instances, sorted by price
+    product_sizes = ProductSize.objects.all().order_by('price')
+
+    # Prefetch related products (optional, for performance improvement)
+    products = Product.objects.prefetch_related(
+        Prefetch('productsize_set', queryset=product_sizes, to_attr='sizes')
+    )
+      
     query = None
     categories = None
     sort = None
@@ -64,9 +70,11 @@ def product_detail(request, product_id):
     """ A view to show individual product details """
 
     product = get_object_or_404(Product, pk=product_id)
+    product_sizes = ProductSize.objects.filter(product=product)
 
     context = {
         'product': product,
+        'product_sizes': product_sizes,
     }
 
     return render(request, 'products/product_detail.html', context)

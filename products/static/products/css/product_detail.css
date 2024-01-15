@@ -1,0 +1,24 @@
+.image-container img {
+    max-width: 100%;
+    height: auto;
+}
+
+.product-details-container {
+    padding: 20px;
+}
+
+.size-button {
+    margin-right: 5px;
+    padding: 5px 10px;
+}
+
+#price-display {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+@media (min-width: 768px) {
+    .image-container, .product-details-container {
+        padding: 30px;
+    }
+}
