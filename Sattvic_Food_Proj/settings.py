@@ -32,7 +32,9 @@ DEBUG = 'DEVELOPMENT' in os.environ
 DEBUG = True
 
 
-ALLOWED_HOSTS = ['sattvic-food.herokuapp.com', '8000-wujiaan2022-sattvicfood-8jhfev6eq3c.ws-eu105.gitpod.io']
+# ALLOWED_HOSTS = ['sattvic-food.herokuapp.com', '8000-wujiaan2022-sattvicfood-8jhfev6eq3c.ws-eu107.gitpod.io']
+
+ALLOWED_HOSTS = ['8000-wujiaan2022-sattvicfood-8jhfev6eq3c.ws-eu107.gitpod.io']
 
 
 # Application definition
