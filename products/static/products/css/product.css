@@ -1,0 +1,93 @@
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    border: 1px solid #eaeaea;
+    border-radius: 10px;
+}
+
+.card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.3);
+}
+
+.card-img-top {
+    margin-top: 15px;
+    margin-bottom: 0;
+    padding: 0;  
+    width: auto;
+    height: 220px; 
+    max-width: 100%; /* To prevent the image from overflowing the card */
+    max-height: 100%; /* To prevent the image from overflowing the card */ 
+}
+
+.card-body {
+    margin-top: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.card-body p {
+    margin-bottom: 5px;
+    font-size: 16px; 
+    color: #333; /* A darker color for better readability */
+}
+
+.card-footer {
+    background: linear-gradient(to right, #f9f9f9, #ececec);
+    height: 100px;
+}
+
+
+.card-footer p {
+    font-size: 14px;
+    color: #666;
+}
+
+.card-body p, .card-footer p {
+    font-family: 'Arial', sans-serif; /* Example: Arial, you can choose any */
+}
+
+.card-footer a {
+    color: #007bff; /* Bootstrap primary color */
+    text-decoration: none;
+}
+
+.card-footer a:hover {
+    text-decoration: underline;
+}
+
+.size-price-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1px;
+    padding-bottom: 0;
+}
+
+.size, .price {
+    flex: 1; /* This makes the size and price take up equal space */
+    min-width: 0; /* Prevents flex items from overflowing */
+    word-wrap: break-word; /* Ensures text wraps inside its container */
+    padding: 5px;;
+    margin: 0;
+}
+
+.card-extra {
+    padding-top: 5px;
+    padding-left: 20px;
+    height: 50px;
+}
+
+.card-bottom {
+    padding-left: 20px;
+    padding-bottom: 5px;
+}
+
+@media (max-width: 768px) {
+    .card {
+        margin-bottom: 20px;
+    }
+}
