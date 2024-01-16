@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.db.models import Q
+
+from django.db.models import Q, Prefetch
+
 from django.db.models.functions import Lower
 from django.db.models import Min, F, ExpressionWrapper, DecimalField
 from django.db.models import Subquery
@@ -9,17 +11,18 @@ from django.db.models import Subquery
 from .models import Product, Category, Size, ProductSize
 from .forms import ProductForm,  ProductSizeForm, CustomProductSizeFormSet
 
-# Create your views here.
-
 
 def all_products(request):
     """ A view to show all products, including sorting and search queries """
 
-    products = Product.objects.all()
-    
-   # Calculate and set minimum prices for each product using ProductSize model
-    products = products.annotate(minPriceAnnotation=Min('productsize__price'))
-    
+    # Fetch all ProductSize instances, sorted by price
+    product_sizes = ProductSize.objects.all().order_by('price')
+
+    # Prefetch related products (optional, for performance improvement)
+    products = Product.objects.prefetch_related(
+        Prefetch('productsize_set', queryset=product_sizes, to_attr='sizes')
+    )
+      
     query = None
     categories = None
     sort = None
@@ -34,16 +37,11 @@ def all_products(request):
                 products = products.annotate(lower_name=Lower('name'))
             if sortkey == 'category':
                 sortkey = 'category__name'
-                
-            if sortkey == 'minPriceAnnotation':
-            # Sort by the annotated 'min_price_annotation' field
-                sortkey = 'minPriceAnnotation'    
-               
             if 'direction' in request.GET:
                 direction = request.GET['direction']
                 if direction == 'desc':
                     sortkey = f'-{sortkey}'
-            products = products.order_by(sortkey)            
+            products = products.order_by(sortkey)
             
         if 'category' in request.GET:
             categories = request.GET['category'].split(',')
@@ -62,7 +60,6 @@ def all_products(request):
     current_sorting = f'{sort}_{direction}'
 
     context = {
-        
         'products': products,
         'search_term': query,
         'current_categories': categories,
@@ -70,6 +67,66 @@ def all_products(request):
     }
 
     return render(request, 'products/products.html', context)
+
+
+# def all_products(request):
+#     """ A view to show all products, including sorting and search queries """
+
+#     products = Product.objects.all()
+    
+#    # Calculate and set minimum prices for each product using ProductSize model
+#     products = products.annotate(minPriceAnnotation=Min('productsize__price'))
+    
+#     query = None
+#     categories = None
+#     sort = None
+#     direction = None
+
+#     if request.GET:
+#         if 'sort' in request.GET:
+#             sortkey = request.GET['sort']
+#             sort = sortkey
+#             if sortkey == 'name':
+#                 sortkey = 'lower_name'
+#                 products = products.annotate(lower_name=Lower('name'))
+#             if sortkey == 'category':
+#                 sortkey = 'category__name'
+                
+#             if sortkey == 'minPriceAnnotation':
+#             # Sort by the annotated 'min_price_annotation' field
+#                 sortkey = 'minPriceAnnotation'    
+               
+#             if 'direction' in request.GET:
+#                 direction = request.GET['direction']
+#                 if direction == 'desc':
+#                     sortkey = f'-{sortkey}'
+#             products = products.order_by(sortkey)            
+            
+#         if 'category' in request.GET:
+#             categories = request.GET['category'].split(',')
+#             products = products.filter(category__name__in=categories)
+#             categories = Category.objects.filter(name__in=categories)
+
+#         if 'q' in request.GET:
+#             query = request.GET['q']
+#             if not query:
+#                 messages.error(request, "You didn't enter any search criteria!")
+#                 return redirect(reverse('products'))
+            
+#             queries = Q(name__icontains=query) | Q(description__icontains=query)
+#             products = products.filter(queries)
+
+#     current_sorting = f'{sort}_{direction}'
+
+#     context = {
+        
+#         'products': products,
+#         'search_term': query,
+#         'current_categories': categories,
+#         'current_sorting': current_sorting,
+#     }
+
+#     return render(request, 'products/products.html', context)
 
 
 def product_detail(request, product_id):
@@ -96,10 +153,7 @@ def add_product(request):
         if product_form.is_valid() and product_size_form.is_valid():
             # Process and save forms individually
             product = product_form.save()
-            product_size = product_size_form.save(commit=False)
-            
-            # Set the queryset for the product field in product_size_form
-            # product_size_form.fields['product'].queryset = Product.objects.filter(id=product.id)
+            product_size = product_size_form.save(commit=False)            
             
             product_size.product = product
             product_size.save()

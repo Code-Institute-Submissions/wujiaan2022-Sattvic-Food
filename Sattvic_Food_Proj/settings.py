@@ -39,6 +39,8 @@ ALLOWED_HOSTS = ['8000-wujiaan2022-sattvicfood-8jhfev6eq3c.ws-eu107.gitpod.io']
 
 # Application definition
 
+SESSION_ENGINE = 'django.contrib.sessions.backends.db' 
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',

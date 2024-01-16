@@ -1,5 +1,7 @@
-{% if item.product_with_size.product.image %}
-<img class="img-fluid rounded" src="{{ item.product_with_size.product.image.url }}" alt="{{ item.product.name }}" >
-{% else %}
-<img class="img-fluid rounded" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}" >
-{% endif %}
+<div class="bag-image">
+    {% if item.product_size.product.image %}
+    <img class="small-bag-image img-fluid rounded" src="{{ item.product_size.product.image.url }}" alt="{{ item.product.name }}" style="width: 100px; height: auto;" >
+    {% else %}
+    <img class="small-bag-image img-fluid rounded" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}" >
+    {% endif %}
+</div>

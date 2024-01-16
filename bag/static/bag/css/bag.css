@@ -1,0 +1,8 @@
+.bag-image {    
+    height: 100px;
+}
+
+.small-bag-image {
+    width: 100px; /* or any size you prefer */
+    height: auto;
+}
