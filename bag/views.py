@@ -5,11 +5,42 @@ from django.contrib import messages
 
 from products.models import Product
 
+from django.http import HttpResponseRedirect
+
 
 def view_bag(request):
     """ A view that renders the bag contents page """
 
     return render(request, 'bag/bag.html')
+
+
+def add_to_bag_fromCard(request, item_id):
+    """ Add a quantity of 1 of the specified product to the shopping bag from the product card """
+
+    quantity = 1  # Default quantity is set to 1 for quick add
+    size = None
+    if 'product_size' in request.GET:  # Assuming size is passed as a GET parameter
+        size = request.GET['product_size']
+    bag = request.session.get('bag', {})
+
+    if size:
+        if item_id in list(bag.keys()):
+            if size in bag[item_id]['items_by_size'].keys():
+                bag[item_id]['items_by_size'][size] += quantity
+            else:
+                bag[item_id]['items_by_size'][size] = quantity
+        else:
+            bag[item_id] = {'items_by_size': {size: quantity}}
+    else:
+        if item_id in list(bag.keys()):
+            bag[item_id] += quantity
+        else:
+            bag[item_id] = quantity
+
+    request.session['bag'] = bag
+
+    # Redirect back to the same page
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))  # Fallback to home if referer not found
 
 
 def add_to_bag(request, item_id):

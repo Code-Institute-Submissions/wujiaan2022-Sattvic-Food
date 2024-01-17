@@ -75,14 +75,22 @@
                             <div class="card-footer bg-white pt-0 border-0 text-left">
                                 
                                 {% for product_size in product.sizes %}
-                                    <div class="size-price-container">
-                                        <p class="size">Size: {{ product_size.size.size_name }}</p>
-                                        <p class="price">Price: {{ product_size.price }}</p>
-                                    </div>
+
+                                <div class="size-price-container">
+
+                                    <!-- Combined Size, Price, and Add to Bag Button -->
+                                    <a href="{% url 'add_to_bag_fromCard' item_id=product.id %}?product_size={{ product_size.size_id }}" class="add-to-bag-btn">
+                                        <span class="size">Size: {{ product_size.size.size_name }}</span>
+                                        <span class="price">Price: {{ product_size.price }}</span>
+                                        <i class="fas fa-shopping-bag fa-lg"></i>
+                                    </a>
+
+                                </div>
+
                                 {% endfor %}
                                 
                             </div>
-                            
+
                             <div class="card-extra">
                                 {% if product.category %}
                                     <p class="small mt-1 mb-0">
