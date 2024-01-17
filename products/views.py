@@ -130,13 +130,27 @@ def all_products(request):
 
 
 def product_detail(request, product_id):
+    """ A view to show individual product details """
+
     product = get_object_or_404(Product, pk=product_id)
     product_sizes = ProductSize.objects.filter(product=product)
-    
-    return render(request, 'products/product_detail.html', {
+
+    context = {
         'product': product,
-        'product_sizes': product_sizes
-    })
+        'product_sizes': product_sizes,
+    }
+
+    return render(request, 'products/product_detail.html', context)
+
+
+# def product_detail(request, product_id):
+#     product = get_object_or_404(Product, pk=product_id)
+#     product_sizes = ProductSize.objects.filter(product=product)
+    
+#     return render(request, 'products/product_detail.html', {
+#         'product': product,
+#         'product_sizes': product_sizes
+#     })
 
 
 @login_required

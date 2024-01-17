@@ -24,5 +24,6 @@
    "workbench.colorTheme": "Visual Studio Dark",
    "terminal.integrated.gpuAcceleration": "canvas",
    "editor.defaultFormatter": "HookyQR.beautify",
-   "editor.linkedEditing": true
+   "editor.linkedEditing": true,
+   "terminal.integrated.accessibleViewPreserveCursorPosition": true
 }
