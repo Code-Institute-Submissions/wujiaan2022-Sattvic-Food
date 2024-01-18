@@ -36,48 +36,73 @@
 }
 
 .card-footer {
-    background: linear-gradient(to right, #f9f9f9, #ececec);
+    /* background: linear-gradient(to right, #f9f9f9, #ececec); */
     height: 110px;
 }
 
-
-.card-footer p {
-    font-size: 14px;
-    color: #666;
-}
-
 .card-body p, .card-footer p {
-    font-family: 'Arial', sans-serif; /* Example: Arial, you can choose any */
-}
-
-.card-footer a {
-    color: #007bff; /* Bootstrap primary color */
-    text-decoration: none;
-}
-
-.card-footer a:hover {
-    text-decoration: underline;
+    font-family: 'Arial', sans-serif; 
 }
 
 .size-price-container {
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between;  */
     align-items: center;
-    padding-top: 10px;
-    /* padding-bottom: 10px; */
+    padding-top: 0;
     padding-bottom: 0;
 }
 
-.size, .price {
-    flex: 1; /* This makes the size and price take up equal space */
-    min-width: 0; /* Prevents flex items from overflowing */
-    word-wrap: break-word; /* Ensures text wraps inside its container */
-    padding: 1px;;
-    margin: 0;
+.card-footer a {
+    color: #0c899c; 
+    text-decoration: none;
+}
+
+.add-to-bag-btn {
+    display: flex;
+    justify-content: space-around; 
+    align-items: center;
+    width: 100%; /* Optional: make the link take full width of the parent container */
+
+    margin: 5px 0;
+    
+    font-size: 14px; 
+    font-weight: bold;
+        
+    background: #f9f9f9;    
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    
+    cursor: pointer; /* Changes cursor to pointer to indicate it's clickable */
+   
+    transition: all 0.3s ease; /* Smooth transition for hover effects */
+    
+}
+
+.add-to-bag-btn:hover {
+    background-color: #f8edd0; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+}
+
+.card-size-price, .card-icon-text {
+    margin: 5px 0; 
+    padding: 0; 
+}
+
+.card-size-price .size, 
+.card-size-price .price, 
+.card-icon-text .card-icon-text {
+    flex: 0 0 auto; /* Do not grow, do not shrink, and base size on content */
+    
+    align-items: center; /* Align text and icon vertically in the center */
+    /* justify-content: center; Center content horizontally */
+}
+
+.clicked {
+    background-color: #f8edd0;     
 }
 
 .card-extra {
-    padding-top: 5px;
+    padding-top: 10px;
     padding-left: 20px;
     height: 50px;
 }
@@ -86,6 +111,11 @@
     padding-left: 20px;
     padding-bottom: 5px;
 }
+
+
+
+
+
 
 @media (max-width: 768px) {
     .card {

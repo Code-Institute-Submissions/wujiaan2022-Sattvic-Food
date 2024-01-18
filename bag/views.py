@@ -7,6 +7,10 @@ from products.models import Product
 
 from django.http import HttpResponseRedirect
 
+from django.http import JsonResponse
+
+from django.views.decorators.http import require_POST
+
 
 def view_bag(request):
     """ A view that renders the bag contents page """
@@ -121,3 +125,4 @@ def remove_from_bag(request, item_id):
 
     except Exception as e:
         return HttpResponse(status=500)
+

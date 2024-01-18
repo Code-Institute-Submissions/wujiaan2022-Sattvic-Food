@@ -136,9 +136,8 @@
 
 
 {% block postloadjs %}   
+    {{ block.super }}
+    {% include 'products/includes/quantity_input_script.html' %}
 
-{{ block.super }}
-{% include 'products/includes/quantity_input_script.html' %}
-
-<script src="{% static 'products/js/price_size.js' %}"></script>
+    <script src="{% static 'products/js/price_size.js' %}"></script>
 {% endblock %}

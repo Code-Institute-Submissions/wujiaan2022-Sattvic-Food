@@ -80,9 +80,14 @@
 
                                     <!-- Combined Size, Price, and Add to Bag Button -->
                                     <a href="{% url 'add_to_bag_fromCard' item_id=product.id %}?product_size={{ product_size.size_id }}" class="add-to-bag-btn">
-                                        <span class="size">Size: {{ product_size.size.size_name }}</span>
-                                        <span class="price">Price: {{ product_size.price }}</span>
-                                        <i class="fas fa-shopping-bag fa-lg"></i>
+                                        <span class="card-size-price">
+                                            <span class="size">{{ product_size.size.size_name }}</span>
+                                            <span class="price"> - ${{ product_size.price }}</span>
+                                        </span>                                        
+                                        <span class="card-icon-text">
+                                            <span  class="next-icon-text">- Add to Cart</span>
+                                            <i class="fas fa-shopping-bag fa-md"></i>
+                                        </span>                                        
                                     </a>
 
                                 </div>
@@ -151,34 +156,8 @@
 
 
 {% block postloadjs %}
-    {{ block.super }}
+    {{ block.super }}  
 
-    <script type="text/javascript">
-		$('.btt-link').click(function(e) {
-			window.scrollTo(0,0)
-		})
-	</script>
+    <script src="{% static 'products/js/products.js' %}"></script>
     
-    <script type="text/javascript">
-        $('#sort-selector').change(function() {
-            var selector = $(this);
-            var currentUrl = new URL(window.location);
-
-            var selectedVal = selector.val();
-            if(selectedVal != "reset"){
-                var sort = selectedVal.split("_")[0];
-                var direction = selectedVal.split("_")[1];
-
-                currentUrl.searchParams.set("sort", sort);
-                currentUrl.searchParams.set("direction", direction);
-
-                window.location.replace(currentUrl);
-            } else {
-                currentUrl.searchParams.delete("sort");
-                currentUrl.searchParams.delete("direction");
-
-                window.location.replace(currentUrl);
-            }
-        })
-    </script>
 {% endblock %}
