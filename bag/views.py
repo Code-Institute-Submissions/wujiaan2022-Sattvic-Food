@@ -47,6 +47,33 @@ def add_to_bag_fromCard(request, item_id):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))  # Fallback to home if referer not found
 
 
+# def add_to_bag_fromCard(request, item_id):
+#     """ Add a quantity of 1 of the specified product to the shopping bag from the product card """
+
+#     size = None
+#     if 'product_size' in request.GET:
+#         size = request.GET['product_size']
+    
+#     # Create a unique key for the product and size combination
+#     item_key = f"{item_id}_{size}" if size else str(item_id)
+    
+#     bag = request.session.get('bag', {})
+
+#     # Check if the unique item_key is already in the bag
+#     if item_key in bag:
+#         # Increment quantity for existing item
+#         bag[item_key]['quantity'] += 1
+#     else:
+#         # Add new item to the bag with quantity set to 1
+#         bag[item_key] = {'quantity': 1, 'size': size} if size else {'quantity': 1}
+
+#     request.session['bag'] = bag
+
+#     # Redirect back to the same page
+#     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))  # Fallback to home if referer not found
+
+
+
 def add_to_bag(request, item_id):
     """ Add a quantity of the specified product to the shopping bag """
 
@@ -65,11 +92,11 @@ def add_to_bag(request, item_id):
                 bag[item_id]['items_by_size'][size] = quantity
         else:
             bag[item_id] = {'items_by_size': {size: quantity}}
-    else:
-        if item_id in list(bag.keys()):
-            bag[item_id] += quantity
-        else:
-            bag[item_id] = quantity
+    # else:
+    #     if item_id in list(bag.keys()):
+    #         bag[item_id] += quantity
+    #     else:
+    #         bag[item_id] = quantity
 
     request.session['bag'] = bag
     
