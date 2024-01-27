@@ -23,9 +23,12 @@ def add_to_bag_fromCard(request, item_id):
 
     quantity = 1  # Default quantity is set to 1 for quick add
     size = None
-    if 'product_size' in request.GET:  # Assuming size is passed as a GET parameter
-        size = request.GET['product_size']
+    if 'selected_size' in request.GET:  # Assuming size is passed as a GET parameter
+        size = request.GET['selected_size']
     bag = request.session.get('bag', {})
+    
+    print("Before adding:")
+    print(bag)
 
     if size:
         if item_id in list(bag.keys()):
@@ -40,6 +43,9 @@ def add_to_bag_fromCard(request, item_id):
             bag[item_id] += quantity
         else:
             bag[item_id] = quantity
+            
+    print("After adding:")
+    print(bag)
 
     request.session['bag'] = bag
 
@@ -73,7 +79,6 @@ def add_to_bag_fromCard(request, item_id):
 #     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))  # Fallback to home if referer not found
 
 
-
 def add_to_bag(request, item_id):
     """ Add a quantity of the specified product to the shopping bag """
 
@@ -83,6 +88,9 @@ def add_to_bag(request, item_id):
     if 'product_size' in request.POST:
         size = request.POST['product_size']
     bag = request.session.get('bag', {})
+    
+    print("Before adding:")
+    print(bag)
 
     if size:
         if item_id in list(bag.keys()):
@@ -98,9 +106,12 @@ def add_to_bag(request, item_id):
     #     else:
     #         bag[item_id] = quantity
 
+    print("After adding:")
+    print(bag)
+    
     request.session['bag'] = bag
     
-    print(request.session['bag'])
+    # print(request.session['bag'])
     
     return redirect(redirect_url)
 

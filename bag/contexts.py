@@ -17,6 +17,7 @@ def bag_contents(request):
         if isinstance(item_data, int):
             # For items without size, default size or single size handling
             product_size = ProductSize.objects.filter(product=product).first()
+            
             if product_size:
                 total += item_data * product_size.price
                 product_count += item_data
