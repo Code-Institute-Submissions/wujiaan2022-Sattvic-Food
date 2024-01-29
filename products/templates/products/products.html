@@ -59,11 +59,11 @@
                     <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
                         <div class="card h-100 border-0">
                             {% if product.image %}
-                            <a href="{% url 'product_detail' product.id %}">
+                            <a href="{% url 'product_detail' product_id=product.id %}">
                                 <img class="card-img-top mx-auto d-block img-fluid" src="{{ product.image.url }}" alt="{{ product.name }}">
                             </a>
                             {% else %}
-                            <a href="{% url 'product_detail' product.id %}">
+                            <a href="{% url 'product_detail' product_id %}">
                                 <img class="card-img-top mx-auto d-block img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
                             </a>
                             {% endif %}
@@ -79,7 +79,7 @@
                                 <div class="size-price-container">
 
                                     <!-- Combined Size, Price, and Add to Bag Button -->
-                                    <a href="{% url 'add_to_bag_fromCard' item_id=product.id %}?selected_size={{ product_size.size_id }}" class="add-to-bag-btn">
+                                    <a href="{% url 'add_to_bag_fromCard' product_size_id=product_size.id %}" class="add-to-bag-btn">
                                         <span class="card-size-price">
                                             <span class="size">{{ product_size.size.size_name }}</span>
                                             <span class="price"> - ${{ product_size.price }}</span>

@@ -1,34 +1,44 @@
-<form class="form update-form" method="POST" action="{% url 'adjust_bag' item.item_id %}">
+<form class="form update-form" method="POST" action="{% url 'adjust_bag' item.product_size_id %}">
     {% csrf_token %}
     <div class="form-group">
-        <div class="input-group input-group-{{ item.item_id }}">
-            <div class="input-group-prepend">
-                <button class="decrement-qty btn btn-sm btn-black rounded-0 decrement-qty_{{ item.item_id }} 
-                    {% if item.size %}decrement-size_{{ item.item_id }}_{{ item.size }}{% endif %}" 
-                    data-item_id="{{ item.item_id }}" data-size="{{ item.size }}">
-                    <span>
-                        <i class="fas fa-minus fa-sm"></i>
-                    </span>
-                </button>
-            </div>
-            <input class="form-control form-control-sm qty_input id_qty_{{ item.item_id }} 
-                {% if item.size %}size_{{ item.item_id }}_{{ item.size }}{% endif %}" type="number"
-                name="quantity" value="{{ item.quantity }}" min="1" max="99"
-                data-item_id="{{ item.item_id }}" data-size="{{ item.size }}">
-            <div class="input-group-append">
-                <button class="increment-qty btn btn-sm btn-black rounded-0 increment-qty_{{ item.item_id }} 
-                    {% if item.size %}increment-size_{{ item.item_id }}_{{ item.size }}{% endif %}"
-                    data-item_id="{{ item.item_id }}" data-size="{{ item.size }}">
-                    <span>
-                        <i class="fas fa-plus fa-sm"></i>
-                    </span>
-                </button>
-            </div>
-            {% comment %} {% if item.product.has_sizes %}
-                <input type="hidden" name="product_size" value="{{ item.size }}">
-            {% endif %} {% endcomment %}
+        <div class="input-group">
+            <!-- Decrement Button -->
+            <button type="button" class="btn btn-sm btn-black rounded-0" 
+                    onclick="decrementQuantity('{{ item.product_size_id }}')">
+                <i class="fas fa-minus fa-sm"></i>
+            </button>
+
+            <!-- Quantity Input -->
+            <input class="form-control form-control-sm qty_input" type="number" 
+                   name="quantity" value="{{ item.quantity }}" min="1" max="99" 
+                   id="id_qty_{{ item.product_size_id }}">
+
+            <!-- Increment Button -->
+            <button type="button" class="btn btn-sm btn-black rounded-0" 
+                    onclick="incrementQuantity('{{ item.product_size_id }}')">
+                <i class="fas fa-plus fa-sm"></i>
+            </button>
         </div>
     </div>
+    <button type="submit" class="btn btn-info btn-sm">Update</button>
 </form>
-<a class="update-link text-info"><small>Update</small></a>
-<a class="remove-item text-danger float-right" id="remove_{{ item.item_id }}" data-size="{{ item.size }}"><small>Remove</small></a>
+<a href="{% url 'remove_from_bag' item.product_size_id %}" class="text-danger"><small>Remove</small></a>
+
+
+<script>
+    function incrementQuantity(productSizeId) {
+        var qtyInputId = 'id_qty_' + productSizeId;
+        var qtyInput = document.getElementById(qtyInputId);
+        if (qtyInput.value < 99) {
+            qtyInput.value = parseInt(qtyInput.value) + 1;
+        }
+    }
+
+    function decrementQuantity(productSizeId) {
+        var qtyInputId = 'id_qty_' + productSizeId;
+        var qtyInput = document.getElementById(qtyInputId);
+        if (qtyInput.value > 1) {
+            qtyInput.value = parseInt(qtyInput.value) - 1;
+        }
+    }
+</script>

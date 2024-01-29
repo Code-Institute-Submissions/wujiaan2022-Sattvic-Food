@@ -123,8 +123,26 @@
 
 {% block postloadjs %}
     {{ block.super }}   
+
+    <script>
+        function incrementQuantity(productSizeId) {
+            var qtyInputId = 'id_qty_' + productSizeId;
+            var qtyInput = document.getElementById(qtyInputId);
+            if (qtyInput.value < 99) {
+                qtyInput.value = parseInt(qtyInput.value) + 1;
+            }
+        }
+    
+        function decrementQuantity(productSizeId) {
+            var qtyInputId = 'id_qty_' + productSizeId;
+            var qtyInput = document.getElementById(qtyInputId);
+            if (qtyInput.value > 1) {
+                qtyInput.value = parseInt(qtyInput.value) - 1;
+            }
+        }
+    </script>
    
-    <script type="text/javascript">
+    {% comment %} <script type="text/javascript">
         // Update quantity on click
         $('.update-link').click(function(e) {
             var form = $(this).prev('.update-form');
@@ -144,9 +162,9 @@
                 location.reload();
             });
         })
-    </script>
+    </script> {% endcomment %}
 
-    {% include 'products/includes/quantity_input_script.html' %}
+    {% comment %} {% include 'products/includes/quantity_input_script.html' %} {% endcomment %}
 
     <script src="{% static 'products/js/products.js' %}"></script>
 
