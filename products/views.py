@@ -130,9 +130,10 @@ def all_products(request):
 
 
 def product_detail(request, product_id):
-    """ A view to show individual product details """
-
+    # Fetch the Product instance using the provided product_id
     product = get_object_or_404(Product, pk=product_id)
+
+    # Fetch related ProductSize instances for this product
     product_sizes = ProductSize.objects.filter(product=product)
 
     context = {
@@ -141,16 +142,6 @@ def product_detail(request, product_id):
     }
 
     return render(request, 'products/product_detail.html', context)
-
-
-# def product_detail(request, product_id):
-#     product = get_object_or_404(Product, pk=product_id)
-#     product_sizes = ProductSize.objects.filter(product=product)
-    
-#     return render(request, 'products/product_detail.html', {
-#         'product': product,
-#         'product_sizes': product_sizes
-#     })
 
 
 @login_required
