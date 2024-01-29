@@ -122,8 +122,10 @@
 {% endblock %}
 
 {% block postloadjs %}
-    {{ block.super }}      
-   
+    {{ block.super }}     
+
+    {% comment %} {% include 'products/includes/quantity_input_script.html' %}   {% endcomment %}
+
     <script type="text/javascript">
         // Update quantity on click
         $('.update-link').click(function(e) {
@@ -144,27 +146,56 @@
                 location.reload();
             });
         })
-    </script> 
+    </script>   
 
-    <script>
-        function incrementQuantity(productSizeId) {
-            var qtyInput = document.querySelector('.id_qty_' + productSizeId);
-            var currentValue = parseInt(qtyInput.value);
-            if (currentValue < 99) {
-                qtyInput.value = currentValue + 1;
-            }
+    <script type="text/javascript">
+        // Function to disable/enable +/- buttons based on quantity
+        function handleEnableDisable(itemId) {
+            var currentValue = parseInt($(`.id_qty_${itemId}`).val());
+            var minusDisabled = currentValue <= 1; // Disable at 1 instead of < 2
+            var plusDisabled = currentValue >= 99;
+    
+            $(`.decrement-qty_${itemId}`).prop('disabled', minusDisabled);
+            $(`.increment-qty_${itemId}`).prop('disabled', plusDisabled);
         }
     
-        function decrementQuantity(productSizeId) {
-            var qtyInput = document.querySelector('.id_qty_' + productSizeId);
-            var currentValue = parseInt(qtyInput.value);
-            if (currentValue > 1) {
-                qtyInput.value = currentValue - 1;
+        // Enable/disable all inputs on page load
+        $('.qty_input').each(function() {
+            var itemId = $(this).data('item_id');
+            handleEnableDisable(itemId);
+        });
+    
+        // Check enable/disable every time the input is changed
+        $('.qty_input').change(function() {
+            var itemId = $(this).data('item_id');
+            handleEnableDisable(itemId);
+        });
+    
+        // Increment quantity
+        $('.increment-qty').click(function(e) {
+           e.preventDefault();
+           var itemId = $(this).data('item_id');
+           var closestInput = $(this).closest('.input-group').find('.qty_input')[0];
+           var currentValue = parseInt($(closestInput).val());
+           $(closestInput).val(currentValue + 1);
+           handleEnableDisable(itemId);
+        });
+    
+        // Decrement quantity
+        $('.decrement-qty').click(function(e) {
+            e.preventDefault();
+            var itemId = $(this).data('item_id');
+            var closestInput = $(this).closest('.input-group').find('.qty_input')[0];
+            var currentValue = parseInt($(closestInput).val());
+        
+            if (currentValue > 1) { // Check to prevent going below 1
+                $(closestInput).val(currentValue - 1);
+                handleEnableDisable(itemId);
             }
-        }
+        });
     </script>
 
-    {% comment %} {% include 'products/includes/quantity_input_script.html' %}  {% endcomment %}
+   
 
     <script src="{% static 'products/js/products.js' %}"></script>
 
