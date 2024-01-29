@@ -122,27 +122,9 @@
 {% endblock %}
 
 {% block postloadjs %}
-    {{ block.super }}   
-
-    <script>
-        function incrementQuantity(productSizeId) {
-            var qtyInputId = 'id_qty_' + productSizeId;
-            var qtyInput = document.getElementById(qtyInputId);
-            if (qtyInput.value < 99) {
-                qtyInput.value = parseInt(qtyInput.value) + 1;
-            }
-        }
-    
-        function decrementQuantity(productSizeId) {
-            var qtyInputId = 'id_qty_' + productSizeId;
-            var qtyInput = document.getElementById(qtyInputId);
-            if (qtyInput.value > 1) {
-                qtyInput.value = parseInt(qtyInput.value) - 1;
-            }
-        }
-    </script>
+    {{ block.super }}      
    
-    {% comment %} <script type="text/javascript">
+    <script type="text/javascript">
         // Update quantity on click
         $('.update-link').click(function(e) {
             var form = $(this).prev('.update-form');
@@ -162,9 +144,27 @@
                 location.reload();
             });
         })
-    </script> {% endcomment %}
+    </script> 
 
-    {% comment %} {% include 'products/includes/quantity_input_script.html' %} {% endcomment %}
+    <script>
+        function incrementQuantity(productSizeId) {
+            var qtyInput = document.querySelector('.id_qty_' + productSizeId);
+            var currentValue = parseInt(qtyInput.value);
+            if (currentValue < 99) {
+                qtyInput.value = currentValue + 1;
+            }
+        }
+    
+        function decrementQuantity(productSizeId) {
+            var qtyInput = document.querySelector('.id_qty_' + productSizeId);
+            var currentValue = parseInt(qtyInput.value);
+            if (currentValue > 1) {
+                qtyInput.value = currentValue - 1;
+            }
+        }
+    </script>
+
+    {% comment %} {% include 'products/includes/quantity_input_script.html' %}  {% endcomment %}
 
     <script src="{% static 'products/js/products.js' %}"></script>
 
