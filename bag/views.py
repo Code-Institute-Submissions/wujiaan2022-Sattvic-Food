@@ -45,32 +45,35 @@ def add_to_bag_fromCard(request, product_size_id):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))  # Fallback to home if referer not found
 
 
-def add_to_bag(request, product_size_id):
+def add_to_bag(request):
     """ Add a quantity of the specified product to the shopping bag """
 
-    quantity = int(request.POST.get('quantity'))      
-    redirect_url = request.POST.get('redirect_url')
-    
-    bag = request.session.get('bag', {})    
-    
-    if product_size_id in bag:
-        bag[product_size_id] += quantity
-    else:
-        bag[product_size_id] = quantity
-    
-    bag = request.session.get('bag', {})
-    
-    print("Before adding:")
-    print(bag)   
+    if request.method == 'POST':
+        
+        product_size_id = request.POST.get('product_size_id')
+        quantity = request.POST.get('quantity', 1)  # Default to 1 if not set
+        
+        quantity = int(request.POST.get('quantity', 1))
+        
+        print("Product Size ID:", product_size_id)
+        print("Quantity:", quantity)
+        
+        # quantity = int(request.POST.get('quantity'))      
+        redirect_url = request.POST.get('redirect_url')
+        
+        bag = request.session.get('bag', {})
+        print("Before adding:", bag)
 
-    print("After adding:")
-    print(bag)
-    
-    request.session['bag'] = bag
-    
-    print(request.session['bag'])
-    
-    return redirect(redirect_url)
+        if product_size_id in bag:
+            bag[product_size_id] += quantity
+        else:
+            bag[product_size_id] = quantity
+
+        request.session['bag'] = bag  # Save the updated bag back to the session
+
+        print("After adding:", bag)
+        
+        return redirect(redirect_url)
 
 
 def adjust_bag(request, product_size_id):

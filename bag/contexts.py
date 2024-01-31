@@ -14,6 +14,8 @@ def bag_contents(request):
         # Retrieve the ProductSize instance
         product_size = get_object_or_404(ProductSize, pk=product_size_id)
         product = product_size.product  # Get the associated Product
+        
+        quantity = int(quantity)  # Ensure quantity is an integer
 
         total += quantity * product_size.price
         product_count += quantity

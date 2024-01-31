@@ -15,6 +15,17 @@ $(document).ready(function() {
 });
 
 
+document.addEventListener('DOMContentLoaded', function () {
+    const sizeButtons = document.querySelectorAll('.size-button');
+    const productSizeInput = document.getElementById('product_size_id');
+
+    sizeButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const productSizeId = this.getAttribute('data-size-id');
+            productSizeInput.value = productSizeId;
+        });
+    });
+});
 
 // document.querySelectorAll('.size-button').forEach(button => {
 //     button.addEventListener('click', function() {

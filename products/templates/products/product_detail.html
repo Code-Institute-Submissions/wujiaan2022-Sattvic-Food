@@ -81,8 +81,11 @@
 
                     <p class="mt-3">{{ product.description|linebreaks }}</p>
 
-                    <form class="form" action="{% url 'add_to_bag' product.id %}" method="POST">
+                    <form class="form" action="{% url 'add_to_bag' %}" id="add_to_bag_form" method="POST">
                         {% csrf_token %}
+
+                        <!-- Hidden input for the selected ProductSize ID -->
+                        <input type="hidden" name="product_size_id" id="product_size_id" value="">
                         
                         <div class="form-row">
                             
@@ -140,4 +143,21 @@
     {% include 'products/includes/quantity_input_script.html' %}
 
     <script src="{% static 'products/js/price_size.js' %}"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const sizeButtons = document.querySelectorAll('.size-button');
+            const productSizeInput = document.getElementById('product_size_id');
+
+            console.log("Selected Product Size ID:", productSizeId); // Debugging line
+        
+            sizeButtons.forEach(button => {
+                    button.addEventListener('click', function () {
+                    const productSizeId = this.getAttribute('data-size-id');
+                    productSizeInput.value = productSizeId;
+                });
+            });
+        });
+    </script>
+
 {% endblock %}
