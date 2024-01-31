@@ -23,6 +23,9 @@ def add_to_bag_fromCard(request, product_size_id):
     quantity = 1  # Default quantity is set to 1 for quick add
     bag = request.session.get('bag', {})
 
+     # Convert product_size_id to string (or integer if that's your preference)
+    product_size_id = str(product_size_id)
+
     print("Before adding:")
     print(bag)
 
@@ -35,6 +38,8 @@ def add_to_bag_fromCard(request, product_size_id):
     print(bag)
 
     request.session['bag'] = bag
+    request.session.modified = True  # Ensure session is marked as modified
+
 
     # Redirect back to the same page
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))  # Fallback to home if referer not found
