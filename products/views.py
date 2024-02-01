@@ -15,11 +15,12 @@ from .forms import ProductForm,  ProductSizeForm, CustomProductSizeFormSet
 def all_products(request):
     """ A view to show all products, including sorting and search queries """
 
-    # Fetch all ProductSize instances, sorted by price
-    product_sizes = ProductSize.objects.all().order_by('price')
+     # Start by annotating products with the minimum price from ProductSize
+    products_with_min_price = Product.objects.annotate(min_price=Min('productsize__price'))
 
-    # Prefetch related products (optional, for performance improvement)
-    products = Product.objects.prefetch_related(
+    # Then, prefetch related ProductSize instances to improve performance
+    product_sizes = ProductSize.objects.all().order_by('price')
+    products = products_with_min_price.prefetch_related(
         Prefetch('productsize_set', queryset=product_sizes, to_attr='sizes')
     )
       
@@ -37,6 +38,10 @@ def all_products(request):
                 products = products.annotate(lower_name=Lower('name'))
             if sortkey == 'category':
                 sortkey = 'category__name'
+                
+            if sortkey == 'minPriceAnnotation':
+                sortkey = 'min_price'  # Use the annotation 'min_price' 
+            
             if 'direction' in request.GET:
                 direction = request.GET['direction']
                 if direction == 'desc':
