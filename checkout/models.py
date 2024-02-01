@@ -7,7 +7,7 @@ from django.conf import settings
 
 from django_countries.fields import CountryField
 
-from products.models import Product
+from products.models import Product, Category, Size, ProductSize
 from profiles.models import UserProfile
 
 
@@ -64,20 +64,23 @@ class Order(models.Model):
 
 
 class OrderLineItem(models.Model):
-    order = models.ForeignKey(Order, null=False, blank=False, on_delete=models.CASCADE, related_name='lineitems')
-    product = models.ForeignKey(Product, null=False, blank=False, on_delete=models.CASCADE)
-    product_size = models.CharField(max_length=2, null=True, blank=True)
-    quantity = models.IntegerField(null=False, blank=False, default=0)
-    lineitem_total = models.DecimalField(max_digits=6, decimal_places=2, null=False, blank=False, editable=False)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='lineitems')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product_size = models.ForeignKey(ProductSize, on_delete=models.CASCADE, null=True, blank=True)  # New field
+    size_label = models.CharField(max_length=2, null=True, blank=True)  # Renamed field
+    quantity = models.IntegerField(default=0)
+    lineitem_total = models.DecimalField(max_digits=6, decimal_places=2, editable=False)
 
     def save(self, *args, **kwargs):
         """
-        Override the original save method to set the lineitem total
-        and update the order total.
+        set the lineitem total based on the product_size's price.
         """
-        self.lineitem_total = self.product.price * self.quantity
+        if self.product_size:
+            self.lineitem_total = self.product_size.price * self.quantity
+        else:
+            self.lineitem_total = self.product.price * self.quantity  # Fallback if product_size is not used
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f'SKU {self.product.sku} on order {self.order.order_number}'
+        return f'{self.product.name} ({self.size_label}) on order {self.order.order_number}'
 
