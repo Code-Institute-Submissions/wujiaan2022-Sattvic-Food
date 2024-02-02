@@ -3,7 +3,7 @@ from django.shortcuts import (
 )
 from django.contrib import messages
 
-from products.models import Product
+from products.models import Product, Category, Size, ProductSize
 
 from django.http import HttpResponseRedirect
 
@@ -23,6 +23,11 @@ def add_to_bag_fromCard(request, product_size_id):
     quantity = 1  # Default quantity is set to 1 for quick add
     bag = request.session.get('bag', {})
 
+    # Fetch the ProductSize instance from the database
+    product_size = get_object_or_404(ProductSize, pk=product_size_id)
+    # You can access the related Product directly using the related name or attribute on your model
+    product = product_size.product
+    
      # Convert product_size_id to string (or integer if that's your preference)
     product_size_id = str(product_size_id)
 
@@ -31,8 +36,13 @@ def add_to_bag_fromCard(request, product_size_id):
 
     if product_size_id in bag:
         bag[product_size_id] += quantity
+        
+        messages.success(request, f'Updated {product_size.size} {product.name} quantity to your bag')
+        
     else:
         bag[product_size_id] = quantity
+        
+        messages.success(request, f'Added {product_size.size} {product.name} to your bag')
 
     print("After adding:")
     print(bag)
@@ -48,26 +58,34 @@ def add_to_bag_fromCard(request, product_size_id):
 def add_to_bag(request):
     """ Add a quantity of the specified product to the shopping bag """
 
-    if request.method == 'POST':
-        
+    if request.method == 'POST': 
+             
         product_size_id = request.POST.get('product_size_id')
-        quantity = request.POST.get('quantity', 1)  # Default to 1 if not set
+        # quantity = request.POST.get('quantity', 1)  # Default to 1 if not set
         
         quantity = int(request.POST.get('quantity', 1))
         
         print("Product Size ID:", product_size_id)
-        print("Quantity:", quantity)
-        
-        # quantity = int(request.POST.get('quantity'))      
+        print("Quantity:", quantity)        
+          
         redirect_url = request.POST.get('redirect_url')
+        
+        product_size = get_object_or_404(ProductSize, pk=product_size_id)
+        product = product_size.product 
+        print(product_size.size, product.name)
         
         bag = request.session.get('bag', {})
         print("Before adding:", bag)
 
         if product_size_id in bag:
             bag[product_size_id] += quantity
+            
+            messages.success(request, f'Updated {product_size.size} {product.name} quantity to your bag')
+            
         else:
             bag[product_size_id] = quantity
+            
+            messages.success(request, f'Added {product_size.size} {product.name} to your bag')
 
         request.session['bag'] = bag  # Save the updated bag back to the session
 
