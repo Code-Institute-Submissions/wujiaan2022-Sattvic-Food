@@ -252,20 +252,20 @@ input[name='q']::placeholder {
 
   
 /* fixed top navbar only on medium and up */
-@media (min-width: 992px) {
+/* @media (min-width: 992px) {
     .fixed-top-desktop-only {
         position: fixed;
         top: 0;
         right: 0;
         left: 0;
         z-index: 1030;
-    }
+    } */
 
-    .header-container {
+    /* .header-container {
         /* padding-top: 164px; */
     }
     
-}
+} */
 
 @media (max-width: 350px) {
 .navbar-toggler-icon{
@@ -286,7 +286,7 @@ i {
 /* pad the top a bit when navbar is collapsed on mobile */
 @media (max-width: 991px) {
     .header-container {
-        padding-top: 116px;
+        /* padding-top: 116px; */
     }
 
     body {

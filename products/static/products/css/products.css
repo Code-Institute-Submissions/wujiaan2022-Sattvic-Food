@@ -1,7 +1,9 @@
+
 .card {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     border: 1px solid #eaeaea;
     border-radius: 10px;
+    /* padding-bottom: 10px; */
 }
 
 .card {
@@ -118,7 +120,14 @@
 
 
 @media (max-width: 768px) {
+
+    .product-container {
+        margin: auto;
+        padding: 0;
+        offset: 0;
+    }
+
     .card {
-        margin-bottom: 20px;
+        /* margin-bottom: 20px; */
     }
 }
