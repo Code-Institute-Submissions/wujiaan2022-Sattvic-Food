@@ -42,8 +42,8 @@
     
     <title>Sattvic Food {% block extra_title %}{% endblock extra_title %}</title>
   </head>
-  <body>
-    <header class="container-fluid">
+  <body class="w-100">
+    <header class="container-fluid w-100">
       <div id="topnav" class="row bg-white d-none d-lg-flex">
         <div class="col-12 col-lg-4 my-auto py-1 py-lg-0 text-center text-lg-left">
           <a href="{% url 'home' %}" class="nav-link main-logo-link">
@@ -166,7 +166,7 @@
               <p>Magic of Sattvic Movement in Mental Health</p>
             </div>            
 
-            <div class="col-12 col-md-6 text-success">                      
+            <div class="col-12 col-md-6 text-success p-0">                      
               <!-- Begin Mailchimp Signup Form -->
               <link href="//cdn-images.mailchimp.com/embedcode/classic-071822.css" rel="stylesheet" type="text/css">
               <style type="text/css">
@@ -174,7 +174,7 @@
                 /* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
                   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
               </style>
-              <div id="mc_embed_signup">
+              <div id="mc_embed_signup" class="w-100">
                 <form action="https://herokuapp.us21.list-manage.com/subscribe/post?u=be50432330e5e76e4a606d469&amp;id=42a75dbdce&amp;f_id=001453e1f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
                   <div id="mc_embed_signup_scroll">
                     <h3>Subscribe!</h3>
@@ -235,6 +235,7 @@
               <!--End mc_embed_signup-->
 
             </div>
+
           </div>
         </section>
       </div>
