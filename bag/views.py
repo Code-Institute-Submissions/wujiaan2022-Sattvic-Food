@@ -8,6 +8,7 @@ from products.models import Product, Category, Size, ProductSize
 from django.http import HttpResponseRedirect
 
 from django.http import JsonResponse
+from bag.contexts import bag_contents
 
 from django.views.decorators.http import require_POST
 
@@ -37,12 +38,12 @@ def add_to_bag_fromCard(request, product_size_id):
     if product_size_id in bag:
         bag[product_size_id] += quantity
         
-        messages.success(request, f'Updated {product_size.size} {product.name} quantity to your bag')
+        # messages.success(request, f'Updated {product_size.size} {product.name} quantity to your bag')
         
     else:
         bag[product_size_id] = quantity
         
-        messages.success(request, f'Added {product_size.size} {product.name} to your bag')
+        # messages.success(request, f'Added {product_size.size} {product.name} to your bag')
 
     print("After adding:")
     print(bag)
@@ -50,9 +51,21 @@ def add_to_bag_fromCard(request, product_size_id):
     request.session['bag'] = bag
     request.session.modified = True  # Ensure session is marked as modified
 
-
-    # Redirect back to the same page
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))  # Fallback to home if referer not found
+    # After updating the bag, get the updated bag context
+    context = bag_contents(request)
+    grand_total = context['grand_total']
+    updated_quantity = bag[str(product_size_id)]
+    
+    # Return the updated context as part of the JsonResponse
+    return JsonResponse({
+        'success': True,
+        'message': 'Product added to bag!',
+        'bag_items_count': context['product_count'],
+        'bag_total': float(context['total']),
+        'delivery': float(context['delivery']),
+        'grand_total': float(context['grand_total']),
+        'updated_quantity': updated_quantity
+    })
 
 
 def add_to_bag(request):

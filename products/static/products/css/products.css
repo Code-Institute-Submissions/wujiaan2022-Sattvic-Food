@@ -60,6 +60,9 @@
 }
 
 .add-to-bag-btn {
+
+    position: relative; /* This doesn't change their layout but provides a positioning context for absolutely positioned child elements (like badges) */
+
     display: flex;
     justify-content: space-around; 
     align-items: center;
@@ -112,6 +115,20 @@
 .card-bottom {
     padding-left: 20px;
     padding-bottom: 5px;
+}
+
+.badge {
+    position: absolute;
+    top: -10px; /* Adjust as needed */
+    right: -10px; /* Adjust as needed */
+    padding: 5px;
+    border-radius: 50%;
+    background-color: rgb(5, 102, 39);
+    color: white;
+    display: inline-block;
+    min-width: 20px; /* Ensure it's round */
+    text-align: center;
+    font-size: 12px;
 }
 
 

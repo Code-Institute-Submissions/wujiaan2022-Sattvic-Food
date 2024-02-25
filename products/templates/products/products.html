@@ -79,15 +79,16 @@
                                 <div class="size-price-container">
 
                                     <!-- Combined Size, Price, and Add to Bag Button -->
-                                    <a href="{% url 'add_to_bag_fromCard' product_size_id=product_size.id %}" class="add-to-bag-btn">
+                                    <a href="javascript:void(0);" class="add-to-bag-btn" onclick="addToBag({{ product_size.id }});">
                                         <span class="card-size-price">
                                             <span class="size">{{ product_size.size.size_name }}</span>
                                             <span class="price"> - ${{ product_size.price }}</span>
                                         </span>                                        
                                         <span class="card-icon-text">
-                                            <span  class="next-icon-text">- Add to Cart</span>
+                                            <span  class="next-icon-text"> Add to Cart</span>
                                             <i class="fas fa-shopping-bag fa-md"></i>
-                                        </span>                                        
+                                        </span>
+                                        <span class="badge" id="badge-{{ product_size.id }}" style="display: none;">0</span>                                        
                                     </a>
 
                                     <!-- Hidden input for the minimum price -->
@@ -161,5 +162,38 @@
     {{ block.super }}  
 
     <script src="{% static 'products/js/products.js' %}"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        function addToBag(productSizeId) {
+            $.ajax({
+                url: '/bag/add_card/' + productSizeId + '/',
+                type: 'GET',  // Or 'POST' if you modify your view to handle POST requests
+                dataType: 'json', 
+                success: function(response) {
+                    
+                    $('.add-to-bag-btn').each(function() {
+                        if ($(this).attr('onclick').includes(productSizeId)) {
+                            var badgeId = "#badge-" + productSizeId;
+                            $(badgeId).text(response.updated_quantity); // Update the badge's quantity
+                            $(badgeId).show(); // Make the badge visible
+                        }
+                    });
+
+                    // Update UI elements with the new values from the response
+                    $('#bag-items-count').text(response.bag_items_count + ' Items');
+                    $('#bag-total').text('$' + response.bag_total.toFixed(2));
+                    $('#delivery-cost').text('$' + response.delivery.toFixed(2));
+                    $('#grand-total').text('$' + response.grand_total.toFixed(2));
+                    
+                },
+                
+                error: function(xhr, errmsg, err) {
+                    // handle error
+                    alert("Could not add to bag. Please try again.");
+                }
+            });
+        }
+    </script>
     
 {% endblock %}
