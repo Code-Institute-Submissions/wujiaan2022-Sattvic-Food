@@ -32,7 +32,7 @@ DEBUG = 'DEVELOPMENT' in os.environ
 # DEBUG = True
 
 
-ALLOWED_HOSTS = ['sattvic-food.herokuapp.com', '8000-wujiaan2022-sattvicfood-8jhfev6eq3c.ws-eu107.gitpod.io']
+ALLOWED_HOSTS = ['sattvic-food-dad56f85566e.herokuapp.com', 'localhost']
 
 # ALLOWED_HOSTS = ['8000-wujiaan2022-sattvicfood-vq8km72132a.ws-eu110.gitpod.io']
 
