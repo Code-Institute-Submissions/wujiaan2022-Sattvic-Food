@@ -29,12 +29,35 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'DEVELOPMENT' in os.environ
-DEBUG = True
+# DEBUG = True
 
 
-# ALLOWED_HOSTS = ['sattvic-food.herokuapp.com', '8000-wujiaan2022-sattvicfood-8jhfev6eq3c.ws-eu107.gitpod.io']
+ALLOWED_HOSTS = ['sattvic-food.herokuapp.com', '8000-wujiaan2022-sattvicfood-8jhfev6eq3c.ws-eu107.gitpod.io']
 
-ALLOWED_HOSTS = ['8000-wujiaan2022-sattvicfood-vq8km72132a.ws-eu110.gitpod.io']
+# ALLOWED_HOSTS = ['8000-wujiaan2022-sattvicfood-vq8km72132a.ws-eu110.gitpod.io']
+
+
+# Database
+# https://docs.djangoproject.com/en/3.0/ref/settings/#databases
+
+if 'DATABASE_URL' in os.environ:
+    DATABASES = {
+        'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
+    
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }   
 
 
 # Application definition
@@ -125,22 +148,6 @@ LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
 
 WSGI_APPLICATION = 'Sattvic_Food_Proj.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
-if 'DATABASE_URL' in os.environ:
-    DATABASES = {
-        'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
-    }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        }
-    }
 
 
 # Password validation
