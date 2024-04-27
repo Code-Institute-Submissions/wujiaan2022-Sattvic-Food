@@ -9,66 +9,74 @@ Link to deployed site can be found [Here](https://sattvic-food-dad56f85566e.hero
 
 # Table of Contents
 <!-- TOC -->
-- [E-commerce type](#e-commerce-type)
-- [Marketing](#marketing)
-- [Highlight](#highlight)
-- [User stories](#user-stories)
-- [Existing Features](#existing-features)
-    - [Homepage](#homepage)
-    - [Register/Sign up](#registersign-up)
-    - [Confirm email Address](#confirm-email-address)
-    - [Sign in](#sign-in)
-    - [Logout](#logout)
-    - [All products](#all-products)
-    - [Sort by min price](#sort-by-min-price)
-    - [Sort by category](#sort-by-category)
-    - [Product detail and add to bag](#product-detail-and-add-to-bag)
-    - [The shopping bag](#the-shopping-bag)
-    - [Checkout](#checkout)
-    - [Checkout success](#checkout-success)
-    - [Order confirmation email after payment](#order-confirmation-email-after-payment)
-    - [super user product management](#super-user-product-management)
-        - [manage product on all product page](#manage-product-on-all-product-page)
-        - [manage product on product detail page](#manage-product-on-product-detail-page)
-        - [manage product from my account-product management page](#manage-product-from-my-account-product-management-page)
-    - [Footer](#footer)
-    - [My Profile](#my-profile)
-- [Future features](#future-features)
-- [Web marketing](#web-marketing)
-    - [Email marketing](#email-marketing)
-    - [Search engine optimization](#search-engine-optimization)
-    - [Social media marketing](#social-media-marketing)
-- [Technologies](#technologies)
-- [Testing](#testing)
-    - [Manual Testing](#manual-testing)
-- [User story testing](#user-story-testing)
-    - [Admin](#admin)
-    - [User](#user)
-- [Functionality testing](#functionality-testing)
-- [Compatibility testing](#compatibility-testing)
-- [Lighthouse test](#lighthouse-test)
-- [Javascript validation](#javascript-validation)
-- [Python](#python)
-- [Bugs](#bugs)
-- [Deployment](#deployment)
-- [Creating a fork](#creating-a-fork)
-- [Credits](#credits)
-- [Images are from Unsplash, Adobestock, Pexels](#images-are-from-unsplash-adobestock-pexels)
-- [Code Institute](#code-institute)
-- [ChatGPT](#chatgpt)
+
+- [Sattvic Vegan and Halal](#sattvic-vegan-and-halal)
+- [Table of Contents](#table-of-contents)
+    - [E-commerce type](#e-commerce-type)
+    - [Marketing](#marketing)
+    - [Highlight](#highlight)
+    - [User stories](#user-stories)
+        - [As Admin](#as-admin)
+    - [Existing Features](#existing-features)
+        - [Homepage](#homepage)
+        - [Register/Sign up](#registersign-up)
+        - [Confirm email Address](#confirm-email-address)
+        - [Sign in](#sign-in)
+        - [Logout](#logout)
+        - [All products](#all-products)
+        - [Sort by min price](#sort-by-min-price)
+        - [Sort by category](#sort-by-category)
+        - [Product detail and add to bag](#product-detail-and-add-to-bag)
+        - [The shopping bag](#the-shopping-bag)
+        - [Checkout](#checkout)
+        - [Checkout success](#checkout-success)
+        - [Order confirmation email after payment](#order-confirmation-email-after-payment)
+        - [super user product management](#super-user-product-management)
+            - [manage product on all product page](#manage-product-on-all-product-page)
+            - [manage product on product detail page](#manage-product-on-product-detail-page)
+            - [manage product from my account-product management page](#manage-product-from-my-account-product-management-page)
+        - [Footer](#footer)
+        - [My Profile](#my-profile)
+    - [Future features](#future-features)
+            - [Product rating](#product-rating)
+            - [Blog](#blog)
+            - [Cooking recipes](#cooking-recipes)
+    - [Web marketing](#web-marketing)
+        - [Email marketing](#email-marketing)
+        - [Search engine optimization](#search-engine-optimization)
+        - [Social media marketing](#social-media-marketing)
+    - [Technologies](#technologies)
+    - [Testing](#testing)
+        - [Manual Testing](#manual-testing)
+        - [User story testing](#user-story-testing)
+            - [Admin](#admin)
+            - [User](#user)
+        - [Functionality testing](#functionality-testing)
+        - [Compatibility testing](#compatibility-testing)
+        - [Lighthouse test](#lighthouse-test)
+        - [Javascript validation](#javascript-validation)
+        - [Python](#python)
+    - [Bugs](#bugs)
+    - [Deployment](#deployment)
+        - [Creating a fork](#creating-a-fork)
+        - [Cloning Repository](#cloning-repository)
+    - [Credits](#credits)
+        - [Images are from Unsplash, Adobestock, Pexels](#images-are-from-unsplash-adobestock-pexels)
+        - [Code Institute](#code-institute)
+        - [ChatGPT](#chatgpt)
 
 <!-- /TOC -->
 
-## 1	E-commerce type
+## 	E-commerce type
 Sattvic Food is a B2C type of business. Due to pressure of life amongst us from work/business to family not talking of pandemics, many of us are now opting for online shopping. Sattvic Food aims to offer flexible online shopping to its customers.
-## 2	Marketing
+## 	Marketing
 Though there are a lot of marketing techniques for businesses, Sattiv Food decided to first use the cheaper way, that is facebook to drive out content and engage with customers. Visit our facebook page [Here](https://www.facebook.com/profile.php?id=100092554362855).
-## 3	Highlight
+## 	Highlight
 To enhance the shopping experience for regular customers who know precisely what they want to buy, our online store features size and price buttons directly on each product card on the 'All Products' page. Customers can quickly add items to their shopping bag by clicking on these buttons. To purchase multiple units of the same size, simply click the button additional times. A small, round indicator at the top-right corner of the size and price buttons displays the total quantity selected for each item, allowing customers to easily track their choices. After browsing through the 'All Products' page, customers can use the up arrow at the bottom-right of the window to swiftly navigate back to the shopping bag either for a quick checkout or for checking the total cost.
 ![alt text](<ReadMe Img/highlight.PNG>) 
 
-## 4	User stories
-4.1	As Admin
+## 	User stories
+### 	As Admin
 1.	As an admin I can manage users' accounts so that I can make any required changes to them if needed
 2.	As an admin I can manage products so that I can add , update or delete products when necessary
 3.	As an admin I can view created orders so that I can full fill the orders or amend if needed
@@ -88,79 +96,79 @@ To enhance the shopping experience for regular customers who know precisely what
 10.	As a site user I can view my order summary so that I can verify it before confirming
 11.	As a site user I can checkout securely so that I can I maintain the level of trust on the site
 12.	As a site user I can sign up to newsletter so that I can keep updated on the latest news
-## 5	Existing Features
-### 5.1	Homepage
+## 	Existing Features
+### 	Homepage
 The homepage features a streamlined header and navigation area, offering a clear view of the site's navigational elements. The logo is positioned on the left, while the 'My Account' and 'Shopping Bag' icons are conveniently located to the right. At the center, there is a search bar followed by the navigation menu, facilitating easy access to various site sections.
 
 Below the navigation bar, captivating images of sattvic food draw the visitor's attention and encourage immediate action. Accompanying these images are a compelling slogan and a 'Shop Now' button.
 ![alt text](<ReadMe Img/homepage.PNG>) 
 
 
-### 5.2	Register/Sign up
+### 	Register/Sign up
 On the right side of the home page, for the first time user they will need to register their account to enjoy most of the site benefits such as saving their orders. 
 ![alt text](<ReadMe Img/register.PNG>) 
-### 5.3	Confirm email Address
+### 	Confirm email Address
 ![alt text](<ReadMe Img/recieve email after register.PNG>) 
-### 5.4	Sign in
+### 	Sign in
 Registered users can sign in when they visit the site againThe Remember me option is also available making the shopping easier for returning users. Is users need to reset their password, a forgot password is also available.
 ![alt text](<ReadMe Img/log in.PNG>) 
 
-### 5.5	Logout
+### 	Logout
 Users are able to protect their account by logging out of the site.
 ![alt text](<ReadMe Img/log out.PNG>) 
 
-### 5.6	All products
+### 	All products
 The first navigation link from the logo is all products. This is where you can display all products available. On this a user has a liberty to sort the products either by price or by category.
 ![alt text](<ReadMe Img/highlight.PNG>) 
 
-### 5.7	Sort by min price
+### 	Sort by min price
 ![alt text](<ReadMe Img/sort by min price.PNG>) 
-### 5.8	Sort by category 
+### 5	Sort by category 
 ![alt text](<ReadMe Img/sort by category.PNG>)
-### 5.9	Product detail and add to bag
+### 	Product detail and add to bag
 Each product on site has a detailed information in form of a name, size, price, image, description and its category. The user is displayed with a quantity input box to select the quantity they need to add to the shopping bag either increasing or decreasing. They have an option to go back to products by clicking the keep shopping button. Each time a user add a product to the bag they get a notification that alert them of that action. 
 ![alt text](<ReadMe Img/product detail.PNG>)
-### 5.10	The shopping bag
+### 	The shopping bag
 Consists of the price, quantity of each item and sub total. User has an option to update their bag and or remove some items from bag. They can easily go back to products by clicking keep shopping or go to checkout. 
 ![alt text](<ReadMe Img/shopping bag.PNG>)
-### 5.11	Checkout
+### 	Checkout
 On the left side of the checkout is where user puts their information, and on the right side is a summary of their order that is the total, the delivery.
 ![alt text](<ReadMe Img/check out.PNG>) 
 User has an option to save their information to a profile. 
 ![alt text](<ReadMe Img/save delivery info to profile.PNG>) 
-### 5.12	Checkout success
+### 	Checkout success
 After completing an order, users receive an order confirmation with their details including order number.
 ![alt text](<ReadMe Img/checkout success.PNG>) 
-### 5.13	Order confirmation email after payment
+### 	Order confirmation email after payment
 ![alt text](<ReadMe Img/reviev email after payment.PNG>) 
-### 5.14	super user product management
-#### 5.14.1 manage product on all product page
+### 	super user product management
+####  manage product on all product page
 ![alt text](<ReadMe Img/superUser_all product.PNG>) 
-#### 5.14.2 manage product on product detail page
+####  manage product on product detail page
 ![alt text](<ReadMe Img/superUser_productDetail.PNG>) 
-#### 5.14.3 manage product from my account-product management page
+####  manage product from my account-product management page
 ![alt text](<ReadMe Img/my profile_product management.PNG>) 
-### 5.15	Footer
+### 	Footer
 The contains the newsletter sign up, Facebook link, and external links for user explore the benefits of the sattvic food.
 ![alt text](<ReadMe Img/footer.PNG>) 
-### 5.16	My Profile
+### 	My Profile
 The my profile page displays a user's saved contact infomation and their order history.
 ![alt text](<ReadMe Img/my profile.PNG>) 
-## 6	Future features
-6.1	Product rating  
-6.2	Blog  
-6.3	Cooking recipes
-## 7	Web marketing
-### 7.1	Email marketing
+## 	Future features
+####	Product rating  
+####	Blog  
+####	Cooking recipes
+## 	Web marketing
+### 	Email marketing
 The free version of mailchimp was chosen with the current status of the business. Each user that signs up is added to the weekly newsletter and they might turn out to be future customers henceforth low cost to drive sales.
 ![alt text](<ReadMe Img/footer.PNG>)
-### 7.2	Search engine optimization
+### 	Search engine optimization
 SEO keywords
 ![alt text](<ReadMe Img/meta tags.PNG>) 
-### 7.3	Social media marketing
+### 	Social media marketing
 A facebook page was created to build community from the target market. Facebook is free and it also takes little to no time to set up and also it has so many users whom a business can strive to maintain a certain relationship, create content and connect with a target audience.
 ![alt text](<ReadMe Img/facebook.PNG>) 
-## 8	Technologies
+## 	Technologies
 •	HTML  
 •	CSS  
 •	Javascript  
@@ -182,8 +190,8 @@ A facebook page was created to build community from the target market. Facebook 
 •	Pexels - images used for the project  
 •	Adobestock - images used for the project
 
-## 9	Testing
-### 9.1	Manual Testing
+## 	Testing
+### 	Manual Testing
 | Feature  | 	Test | 	Expected Result	| Actual Result |
 |-------|-----|-------------| -------------|
 Sattiv food  | 	Selecting logo on homepage	|directs user back to homepage | 	Pass
@@ -208,15 +216,15 @@ Login|	Login to an account	|login-in as a new user form works	|Pass
 Login as admin|	Login to as admin |gives access to blog/product management	login-in as a new user form works|	Pass
 Logout	|message shown	|Logging out message shown	|Pass
 
-## 9.2	User story testing
-### 9.2.1 Admin
+### 	User story testing
+####  Admin
 •	As an admin I can manage users' accounts so that I can make any required changes to them if needed  
 •	Admin can manage user accounts from admin panels  
 •	As an admin I can manage products so that I can add , update or delete products when necessary  
 •	Admin can add, delete and update products on the site  
 •	As an admin I can view created orders so that I can full fill the orders or amend if needed  
 •	Admin can view orders in admin panel  
-### 9.2.2 User
+####  User
 •	As a site user I can create or edit my account so that I can update my details accordingly  
 •	A user can create an account using register and update on my profile  
 •	As a site user I can login in my account so that I can view my order history  
@@ -242,15 +250,15 @@ Logout	|message shown	|Logging out message shown	|Pass
 •	As a site user I can sign up to newsletter so that I can keep updated on the latest news  
 •	By going to sign up newsletter on the footer, users can easily sign up to receive latest news.  
 
-## 9.3	Functionality testing
+### 	Functionality testing
 Throughout developing this site, I have been using Chrome, and chrome dev tools to help with debugging issues. Testing responsiveness was done using chrome emulated devices.
 
-## 9.4	Compatibility testing
+### 	Compatibility testing
 Chrome emulated devices, and hardware devices iphone 13, samsung A51 and samsung tablet E were used to test compatibility
 ![alt text](<ReadMe Img/readMe0_pp5.jpg>)
-## 9.5	Lighthouse test
+### 	Lighthouse test
 ![alt text](<ReadMe Img/lighthouse test.PNG>) 
-## 9.6	Javascript validation
+### 	Javascript validation
 I used JSlint to validate javascript in some apps  
 bag app - semi colon warning  
 base.html - zero warnings  
@@ -258,7 +266,7 @@ newsletter - 8 warnings but the code is directly from mailchimp
 checkout - semi colon warnings  
 products - semi colon warnings  
 profiles - no warnings  
-## 9.7	Python
+### 	Python
 CI Python linter was used to test python code
 
 ## 10	Bugs
@@ -272,7 +280,7 @@ Stripe webhook doesn't respond to the request |	Set proper intent metadata and b
 Stripe webhook doesn't respond to the request|	Set proper intent metadata and billing details in webhook handler
 404 page doesn't shown in deploy version|	Set correct Debug settings
 
-## 11	Deployment
+## 	Deployment
 11.1	Before Deployment
 To ensure the application is deployed correctly on Heroku it is mandatory to update the requirements.txt. This is a list of requirements that the application needs in order to run.
 •	To create the list of requirements we use the command pip3 freeze > requirements.txt. This will ensure the file with the requirements is updated.
@@ -390,22 +398,22 @@ o	To save a copy of the credentials click Download .csv
 •	From the tab above select the deploy section.
 •	The deployment method for this project is GitHub. Once selected, confirm that we want to connect to GitHub, search for the repository name, and click connect to connect the Heroku app to our GitHub code.
 •	Scroll further down to the deploy section where automatic deploys can be enabled, which means that the app will update every time code is pushed to GitHub. Click deploy and wait for the app to be built. Once this is done, a message should appear letting us know that the app was successfully deployed with a view button to see the app.
-## 11.5	Creating a fork
+### 	Creating a fork
 1.	Navigate to the repository
 2.	In the top-right corner of the page click on the fork button and select create a fork.
 3.	You can change the name of the fork and add description
 4.	Choose to copy only the main branch or all branches to the new fork.
 5.	Click Create a Fork. A repository should appear in your GitHub
-11.6	Cloning Repository
+### 	Cloning Repository
 1.	Navigate to the repository
 2.	Click on the Code button on top of the repository and copy the link.
 3.	Open Git Bash and change the working directory to the location where you want the cloned directory.
 4.	Type git clone and then paste the link.
 5.	Press Enter to create your local clone.
-# 12	Credits
-## 12.1	Images are from Unsplash, Adobestock, Pexels
-## 12.2	Code Institute 
+## 	Credits
+### 	Images are from Unsplash, Adobestock, Pexels
+### 	Code Institute 
 •	Botique Ado walk through
 •	Hello django 
 •	Dataflair django tutorial
-## 12.3	ChatGPT
+### 	ChatGPT
